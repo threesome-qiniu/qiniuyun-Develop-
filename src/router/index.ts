@@ -9,12 +9,12 @@ const router = createRouter({
     {
       path: "/layout",
       component: () => import("../Layout/index.vue"),
-      
-  
-      children:[{path:'user',component:()=>import('../Layout/User.vue')}]
+
+      children: [
+        { path: "user", component: () => import("../Layout/User.vue") },
+        { path: "Video", component: () => import("../Layout/Video.vue") },
+      ],
     },
-    
-   
   ],
 });
 
