@@ -55,7 +55,8 @@
 
 import { reactive } from 'vue'
 import request from '../utils/request'
-
+import { ElMessage } from 'element-plus'
+import {userlogin} from '@/api/user'
 
 export default {
     name: 'LoginIndex',
@@ -65,27 +66,70 @@ export default {
         }
     },
     async created() {
-        this.goregister()
-       
+
     },
     methods: {
-        
-        userLogin() {
-            this.$router.push('/layout')
+
+        async userLogin() {
+             const res = await userlogin(this.loginform.name,this.loginform.password)
+             if(res.code!=200){
+                ElMessage({
+                    message: res.msg,
+                    type: 'warning',
+                })
+
+             }
+             else{
+                ElMessage({
+                    message: res.msg,
+                    type: 'success',
+                })
+                this.$router.push('/layout')
+                
+             }
+             console.log(res);
+
+          
+
         },
         registerUser() {
             this.login = false
         },
         async goregister() {
-            // this.login = false
+            // this.login = true
             const res = await request.post('/user/api/v1/register', {
-                data: {
-                    "username": "roydon",
-                    "password": "123456",
-                    "confirmPassword": "123456"
-                }
+                username: this.registerform.name,
+                password: this.registerform.password,
+                confirmPassword: this.registerform.checkPass
+
+
             })
+            // 消息提示 判断code值
+            const { code, msg } = res
             console.log(res);
+            if (code != 200) {
+                this.login = false
+                ElMessage({
+                    message: msg,
+                    type: 'warning',
+                })
+
+
+
+            }
+            else {
+                this.login = true
+                ElMessage({
+                    message: msg,
+                    type: 'success',
+                })
+
+            }
+
+
+
+
+
 
 
         }

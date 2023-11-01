@@ -2,7 +2,7 @@ import axios from 'axios'
 import ElementPlus from 'element-plus'
 
 const instance = axios.create({
-    baseURL: 'http://127.0.0.1:9090',
+    baseURL: 'http://39.101.67.45:9090',
     timeout: 5000,
 });
 
