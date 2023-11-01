@@ -5,13 +5,13 @@ const router = createRouter({
     history: createWebHistory(),
 
     routes: [
-        // {path: "/", component: () => import("../Login/Login.vue")},
+        {path: "/login", component: () => import("@/Login/Login.vue")},
         {
             path: "/",
             name: "Index",
             component: () => import("../Layout/index.vue"),
 
-            // children: [{path: 'video', component: () => import('../Layout/Video.vue')}]
+            children: [{path: 'video', component: () => import('../Layout/Video.vue')}]
         },
         {path: '/user', component: () => import('../Layout/User.vue')}
 

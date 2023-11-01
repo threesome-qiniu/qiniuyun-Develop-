@@ -16,7 +16,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src') //@表示src文件 没配置成功
+      '@': path.resolve(__dirname, 'src') //@表示src文件 配置成功
     }
   }
 })
