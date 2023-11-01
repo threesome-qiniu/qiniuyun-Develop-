@@ -4,13 +4,11 @@
 
 <script>
 export default {
-    name:'UsrIndex'
+  name: 'User'
 }
 
 </script>
 
 <style lang='less' scoped>
-
-
 
 </style>
