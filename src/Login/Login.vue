@@ -64,16 +64,21 @@ export default {
             login: true,
         }
     },
+    async created() {
+        this.goregister()
+       
+    },
     methods: {
+        
         userLogin() {
             this.$router.push('/layout')
         },
         registerUser() {
             this.login = false
         },
-        goregister() {
-            this.login = true
-           const res = request.post('/user/api/v1/register', {
+        async goregister() {
+            // this.login = false
+            const res = await request.post('/user/api/v1/register', {
                 data: {
                     "username": "roydon",
                     "password": "123456",
@@ -108,7 +113,7 @@ export default {
             checkPass: [{ required: true, message: '请再次输入密码', trigger: 'blur' },
             { min: 3, max: 9, message: '长度必须3到9位', trigger: 'blur' },
             {
-                validator: (rules:any, value: any, callback: any) => {
+                validator: (rules: any, value: any, callback: any) => {
                     if (value == registerform.password) {
                         callback()
                     } else {
@@ -143,4 +148,5 @@ export default {
     max-width: 100%;
     height: auto;
     background-repeat: no-repeat;
-}</style>
+}
+</style>
