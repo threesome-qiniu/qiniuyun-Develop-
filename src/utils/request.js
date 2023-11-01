@@ -2,13 +2,13 @@ import axios from 'axios'
 import ElementPlus from 'element-plus'
 
 const instance = axios.create({
-    baseURL: 'http://127.0.0.1:9090',
+    baseURL: 'http://39.101.67.45:9090',
     timeout: 5000,
 });
 
 // 添加请求拦截器
 instance.interceptors.request.use(config => {
-    // config.headers['Content-Type'] = 'application/json;charset=utf-8';
+    config.headers['Content-Type'] = 'application/json;charset=utf-8';
     // // 在发送请求之前做些什么
     // // 是否需要设置 token
     // const isToken = (config.headers || {}).isToken === false

@@ -71,8 +71,11 @@
 </template>
 
 <script>
+import {Message} from "@element-plus/icons-vue";
+
 export default {
   name: "Aside",
+  components: {Message},
   props: {
     siteTitle: String,
   },
