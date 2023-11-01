@@ -59,11 +59,9 @@ import request from '../utils/request'
 
 export default {
     name: 'LoginIndex',
-
     data() {
         return {
             login: true,
-
         }
     },
     methods: {
@@ -110,7 +108,7 @@ export default {
             checkPass: [{ required: true, message: '请再次输入密码', trigger: 'blur' },
             { min: 3, max: 9, message: '长度必须3到9位', trigger: 'blur' },
             {
-                validator: (rules, value: any, callback: any) => {
+                validator: (rules:any, value: any, callback: any) => {
                     if (value == registerform.password) {
                         callback()
                     } else {
