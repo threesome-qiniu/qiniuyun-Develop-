@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    baseURL: 'https://some-domain.com/api/',
+    baseURL: 'http://106.14.105.101:9090',
     timeout: 5000,
 
 });
@@ -27,4 +27,4 @@ instance.interceptors.response.use(function (response) {
     return Promise.reject(error);
 });
 
-dexort default instance
+export default instance

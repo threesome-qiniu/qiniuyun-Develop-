@@ -1,4 +1,3 @@
-
 <template>
     <el-row>
         <el-col :span="12" class="bgimage" style="min-height:100vh">
@@ -14,7 +13,7 @@
             <el-form :model="loginform" label-width="120px" v-if="login">
                 <el-form-item label="账号">
                     <el-input v-model="loginform.name" placeholder="请输入账号" />
-                 
+
 
                 </el-form-item>
 
@@ -41,7 +40,7 @@
                     <el-input type="password" v-model="registerform.checkPass" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item style="margin-left: 20px;">
-                    <el-button @click="() => { login = true }" type="primiry"
+                    <el-button @click="goregister" type="primiry"
                         style="width: 240px; background-color:#07A7E1;">注册</el-button>
 
                 </el-form-item>
@@ -55,10 +54,12 @@
 <script lang="ts">
 
 import { reactive } from 'vue'
+import request from '../utils/request'
 
 
 export default {
     name: 'LoginIndex',
+
     data() {
         return {
             login: true,
@@ -71,6 +72,19 @@ export default {
         },
         registerUser() {
             this.login = false
+        },
+        goregister() {
+            this.login = true
+           const res = request.post('/user/api/v1/register', {
+                data: {
+                    "username": "roydon",
+                    "password": "123456",
+                    "confirmPassword": "123456"
+                }
+            })
+            console.log(res);
+
+
         }
 
     },
@@ -96,7 +110,7 @@ export default {
             checkPass: [{ required: true, message: '请再次输入密码', trigger: 'blur' },
             { min: 3, max: 9, message: '长度必须3到9位', trigger: 'blur' },
             {
-                validator: ( rules,value: any, callback: any) => {
+                validator: (rules, value: any, callback: any) => {
                     if (value == registerform.password) {
                         callback()
                     } else {
@@ -131,5 +145,4 @@ export default {
     max-width: 100%;
     height: auto;
     background-repeat: no-repeat;
-}
-</style>
+}</style>
