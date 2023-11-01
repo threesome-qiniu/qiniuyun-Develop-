@@ -8,8 +8,9 @@
 </template>
 
 <script>
-import { ElMessage } from 'element-plus'
-import {register} from "@/api/user.js"
+import {ElMessage} from 'element-plus'
+
+
 export default {
   name: 'Video',
   props: {
@@ -18,13 +19,10 @@ export default {
   data() {
     return {}
   },
-  created(){
-    this.showMsg()
+  created() {
   },
   methods: {
-    showMsg(){
-      ElMessage('欢迎来到牛音')
-    }
+
   }
 }
 

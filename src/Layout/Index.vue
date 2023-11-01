@@ -8,7 +8,7 @@
           <!--          <el-scrollbar>-->
           <div style="width: 90%;float: left">
             <div class="video-container" style="background: goldenrod">
-              <Video></Video>
+              <Video :video-url="videoUrl"></Video>
             </div>
           </div>
           <div style="height:100%;width:10%;background: #07A7E1;float: right">
@@ -87,6 +87,9 @@ import Header from "@/components/Header.vue"
 
 import Video from "@/components/Video.vue"
 
+import {videoFeed} from "@/api/video.js"
+import {ElMessage} from "element-plus";
+
 export default {
   name: 'Home',
   components: {Aside, Header, Video},
@@ -94,15 +97,25 @@ export default {
   data() {
     return {
       siteTitle: "牛音",
-      user: Object
+      user: Object,
+      videoUrl: undefined
     }
   },
   created() {
-    this.initVideo()
+    this.showMsg()
+    this.getVideoFeed()
   },
   methods: {
-    initVideo() {
-      console.log("启动")
+    showMsg() {
+      ElMessage('欢迎来到牛音')
+    },
+    getVideoFeed() {
+      videoFeed(new Date()).then(res => {
+        if (res.code === 200) {
+          this.videoUrl = res.data.videoUrl
+          // console.log(res)
+        }
+      })
     }
   }
 
