@@ -1,7 +1,10 @@
 <template>
   <el-aside width="200px">
     <el-scrollbar>
-      <el-menu :default-openeds="['1', '3']">
+      <div style="width:100%;overflow:hidden;">
+        <img style="width: 100%;height: 60px" src="../assets/268303cadd2e4579bf35faecb5d5914b.jpeg">
+      </div>
+      <el-menu :default-openeds="['1']">
         <el-sub-menu index="1">
           <template #title>
             <el-icon>
@@ -11,8 +14,8 @@
           </template>
           <el-menu-item-group>
             <template #title>Group 1</template>
-            <el-menu-item index="1-1">Option 1</el-menu-item>
-            <el-menu-item index="1-2">Option 2</el-menu-item>
+            <el-menu-item index="/home">Option 1</el-menu-item>
+            <el-menu-item index="/follow">Option 2</el-menu-item>
           </el-menu-item-group>
           <el-menu-item-group title="Group 2">
             <el-menu-item index="1-3">Option 3</el-menu-item>

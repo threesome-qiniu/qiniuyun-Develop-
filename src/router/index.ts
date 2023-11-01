@@ -7,14 +7,15 @@ const router = createRouter({
     routes: [
         {path: "/", component: () => import("@/Login/Login.vue")},
         {
-            path: "/layout",
-            
-            name: "Index",
-            component: () => import("../Layout/index.vue"),
+            path: "/index",
 
-            children: [{path: 'video', component: () => import('../Layout/Video.vue')}]
+            name: "Index",
+            component: () => import("@/Layout/index.vue"),
+
+            // children: [{path: '1', component: () => import('@/Layout/1.vue')}]
         },
-        {path: '/user', component: () => import('../Layout/User.vue')}
+        {path: '/user', component: () => import('@/Layout/User.vue')},
+        {path: '/test', component: () => import('@/Layout/Test.vue')},
 
     ],
 });
