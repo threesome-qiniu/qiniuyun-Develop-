@@ -5,16 +5,16 @@ const router = createRouter({
     history: createWebHistory(),
 
     routes: [
-        {path: "/", component: () => import("@/Login/Login.vue")},
+        {path: "/login", component: () => import("@/Login/Login.vue")},
         {
-            path: "/layout",
-            
+            path: "/",
             name: "Index",
-            component: () => import("../Layout/index.vue"),
+            component: () => import("@/Layout/index.vue"),
 
-            children: [{path: 'video', component: () => import('../Layout/Video.vue')}]
+            // children: [{path: '1', component: () => import('@/Layout/1.vue')}]
         },
-        {path: '/user', component: () => import('../Layout/User.vue')}
+        {path: '/user', component: () => import('@/Layout/User.vue')},
+        {path: '/test', component: () => import('@/Layout/Test.vue')},
 
     ],
 });
