@@ -1,9 +1,13 @@
 <template>
-  <el-header style="text-align: right; font-size: 12px;background:gold">
+  <el-header class="niuyin-header">
     <div class="toolbar">
+      <div>
+        <router-link class="link-type" :to="'/publish'"><span>发布视频</span>
+        </router-link>
+      </div>
       <el-dropdown>
-        <el-icon style="margin-right: 8px; margin-top: 1px">
-          <setting/>
+        <el-icon style="margin: 0 10px">
+          <Message/>
         </el-icon>
         <template #dropdown>
           <el-dropdown-menu>
@@ -13,15 +17,26 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-      <el-image :src="user.avatar"></el-image>
-      <span>roydon</span>
+      <!--      <el-image :src="user.avatar"></el-image>-->
+      <router-link class="link-type" :to="'/user'"><span>roydon</span>
+      </router-link>
     </div>
   </el-header>
 </template>
 
 <script>
+import {
+  Check,
+  Delete,
+  Edit,
+  Message,
+  Search,
+  Star,
+} from '@element-plus/icons-vue'
+
 export default {
   name: "Header",
+  components: {Message},
   props: {
     user: Object
   },
@@ -33,9 +48,12 @@ export default {
 </script>
 
 <style scoped>
+.niuyin-header {
+  text-align: right;
+}
+
 .el-header {
   position: relative;
-  background-color: var(--el-color-primary-light-7);
   color: var(--el-text-color-primary);
 
   .toolbar {

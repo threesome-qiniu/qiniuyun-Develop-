@@ -1,5 +1,4 @@
 //将登陆的接口分离
-import request from '@/utils/request.js'
 import request from '@/utils/request'
 
 // 登录方法
@@ -12,6 +11,13 @@ export function login(username, password) {
         url: '/user/api/v1/login',
         method: 'post',
         data: data
+    })
+}
+
+export const userLogin = (username,password)=>{
+    return request.post('user/api/v1/login',{
+        username,
+        password
     })
 }
 
@@ -40,9 +46,3 @@ export function logout() {
     })
 }
 
-export const userlogin = (username,password)=>{
-    return request.post('user/api/v1/login',{
-        username,
-        password
-    })
-}

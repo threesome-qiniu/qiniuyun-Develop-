@@ -20,3 +20,15 @@ export function videoMypage(data) {
         data: data
     })
 }
+
+// 上传视频
+
+
+// 发布视频
+export function publishVideo(data) {
+    return request({
+        url: '/video/api/v1/publish',
+        method: 'post',
+        data: data
+    })
+}
