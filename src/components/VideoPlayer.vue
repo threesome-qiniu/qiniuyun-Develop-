@@ -8,7 +8,7 @@
            preload
            :src="videoUrl"></video>
   </div>
-  <div class="video-swift flex-center">
+  <div class="video-behave-swift flex-center">
     <el-button @click="getPreviousVideo" type="warning" circle/>
     <el-button @click="getNextVideo" type="primary" circle/>
   </div>
@@ -60,18 +60,21 @@ export default {
 </script>
 <style scoped>
 .video-player {
-  display: block;
   width: 100%;
+  border-radius: 1rem;
   height: 100%;
 }
 
 .video-container {
   width: 90%;
-  height: 100%;
   float: left;
+  backdrop-filter: blur(20px);
+  border-radius: 1rem;
+  margin: 0 auto;
+  height: calc(100vh - 160px);
 }
 
-.video-swift {
+.video-behave-swift {
   width: 10%;
   height: 100%;
   float: right;

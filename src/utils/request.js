@@ -13,7 +13,7 @@ instance.interceptors.request.use(config => {
     // // 是否需要设置 token
     // const isToken = (config.headers || {}).isToken === false
     // if (!isToken) {
-        config.headers['Authorization'] = 'Bearer ' + 'eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAC2LUQrDIBBE77LfEap165rbaLOCgSSSNdBQevduIPM1b4b3hblXGAEDlXd4kiFnvfGFHyYHZFMwFp8tky4wQE0dRvuKpHERB5Ajqy2ndF6uX0Rx385pWxXTMSmm1rTzp6kaCN2tVv3c7w8QZaD7gQAAAA.yZsuNb-qHfy8jBDmpVsTtz2_OYiPmHtwS_2HHpXsxfln1HxEHxpMO0qSN11KbPVVukZO0MuomaeFzrgJAMDMhA' // getToken()如何存
+    config.headers['Authorization'] = 'Bearer ' + 'eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAC2LUQrDIBBE77LfEap165rbaLOCgSSSNdBQevduIPM1b4b3hblXGAEDlXd4kiFnvfGFHyYHZFMwFp8tky4wQE0dRvuKpHERB5Ajqy2ndF6uX0Rx385pWxXTMSmm1rTzp6kaCN2tVv3c7w8QZaD7gQAAAA.yZsuNb-qHfy8jBDmpVsTtz2_OYiPmHtwS_2HHpXsxfln1HxEHxpMO0qSN11KbPVVukZO0MuomaeFzrgJAMDMhA' // getToken()如何存
     // }
     return config;
 }, error => {

@@ -7,15 +7,15 @@
         <el-upload class="avatar-uploader el-upload--text"
                    :action="videoUploadUrl"
                    :show-file-list="false"
+                   :headers="headers"
                    :on-success="handleVideoSuccess"
                    :before-upload="beforeUploadVideo"
                    :on-progress="uploadVideoProcess">
           <video v-if="videoForm.videoUrl != '' && videoFlag == false"
                  :src="videoForm.videoUrl"
                  class="avatar"
-                 controls="controls"
-          >您的浏览器不支持视频播放
-          </video>
+                 controls
+          ></video>
           <i v-else-if="videoForm.videoUrl == '' && videoFlag == false"
              class="el-icon-plus avatar-uploader-icon"></i>
           <el-progress v-if="videoFlag == true"
@@ -60,6 +60,9 @@ export default {
       videoFlag: false,
       form: {},
       videoUploadUrl: "http://39.101.67.45:9090/video/api/v1/upload",
+      headers: {
+        Authorization: "Bearer eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAC2LUQrDIBBE77LfEap165rbaLOCgSSSNdBQevduIPM1b4b3hblXGAEDlXd4kiFnvfGFHyYHZFMwFp8tky4wQE0dRvuKpHERB5Ajqy2ndF6uX0Rx385pWxXTMSmm1rTzp6kaCN2tVv3c7w8QZaD7gQAAAA.yZsuNb-qHfy8jBDmpVsTtz2_OYiPmHtwS_2HHpXsxfln1HxEHxpMO0qSN11KbPVVukZO0MuomaeFzrgJAMDMhA",
+      },
       videoUploadPercent: undefined,
       videoForm: {
         name: '',
@@ -81,6 +84,7 @@ export default {
   created() {
   },
   mounted() {
+    this.$nextTick
   },
   methods: {
     submitForm(formName) {
@@ -118,7 +122,7 @@ export default {
     handleVideoSuccess(res, file) {
       this.videoFlag = false
       this.videoUploadPercent = 0
-      if (res.status === 200) {
+      if (res.code === 200) {
         console.log(res.data)
         this.videoForm.videoUrl = res.data.videoUrl
       } else {
@@ -143,14 +147,14 @@ export default {
 }
 
 .avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9 !important;
+  border: 2px dashed #d9d9d9 !important;
   border-radius: 6px !important;
   position: relative !important;
   overflow: hidden !important;
 }
 
 .avatar-uploader .el-upload:hover {
-  border: 1px dashed #d9d9d9 !important;
+  border: 2px dashed #d9d9d9 !important;
   border-color: #409eff;
 }
 
@@ -164,8 +168,8 @@ export default {
 }
 
 .avatar {
-  width: 300px;
-  height: 178px;
+  width: 320px;
+  height: 180px;
   display: block;
 }
 

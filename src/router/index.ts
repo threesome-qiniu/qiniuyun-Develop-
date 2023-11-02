@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import {createRouter, createWebHistory} from "vue-router";
 
 // 创建路由
 const router = createRouter({
@@ -13,7 +13,7 @@ const router = createRouter({
 
             children: [
                 {path: '', component: () => import('@/Layout/Video.vue')},
-                {path: '/user', component: () => import('@/Layout/User.vue')}
+                {path: 'user', component: () => import('@/Layout/User.vue')}
             ]
         },
         {path: '/publish', component: () => import('@/Layout/Publish.vue')},
