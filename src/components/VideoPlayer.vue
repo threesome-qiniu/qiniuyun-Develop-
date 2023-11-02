@@ -32,24 +32,25 @@ export default {
     }
   },
   created() {
-    // this.$message("左侧为自动播放,动态可调,请点击视频下方'自动播放'按钮");
   },
   mounted() {
-    // this.$refs.video.addEventListener("play", () => {
-    //   this.videoPlay = "play";
-    //   this.duration = this.$refs.video.duration;
-    //   this.currentTime = this.$refs.video.currentTime;
-    // });
-    // // 监听视频暂停
-    // this.$refs.video.addEventListener("pause", () => {
-    //   this.videoPlay = "pause";
-    //   // this.currentTime = this.$refs.videoOne.currentTime;
-    //   if (this.autoPlay === true) {
-    //     if (this.$refs.video.duration === this.$refs.video.currentTime) {
-    //       this.autoReloadVideo();
-    //     }
-    //   }
-    // });
+    this.$refs.video.addEventListener("play", () => {
+      this.videoPlay = "play";
+      this.duration = this.$refs.video.duration;
+      this.currentTime = this.$refs.video.currentTime;
+      console.log(this.duration)
+      console.log(this.currentTime)
+    });
+    // 监听视频暂停
+    this.$refs.video.addEventListener("pause", () => {
+      this.videoPlay = "pause";
+      this.currentTime = this.$refs.video.currentTime;
+      // if (this.autoPlay === true) {
+      //   if (this.$refs.video.duration === this.$refs.video.currentTime) {
+      //     this.autoReloadVideo();
+      //   }
+      // }
+    });
   },
   methods: {
     autoReloadVideo() {

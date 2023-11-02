@@ -34,7 +34,6 @@ export default {
           console.log(res.data.videoUrl)
           this.videoUrl = res.data.videoUrl
           this.publishTime = res.data.createTime
-          // console.log(res)
         }
       })
     },
