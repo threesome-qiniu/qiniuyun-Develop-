@@ -1,5 +1,5 @@
 <template>
-<!--  视频播放-->
+  <!--  视频播放-->
   <VideoPlayer
       v-if="showVideoPlayer"
       :autoPlay="autoPlay"
@@ -31,11 +31,11 @@ export default {
   methods: {
     getVideoFeed() {
       videoFeed(this.publishTime).then(res => {
-        if (res.code === 200) {
-          console.log(res.data.videoUrl)
+        if (res.code === 200 && res.data != null) {
+          // console.log(res.data.videoUrl)
           this.videoUrl = res.data.videoUrl
           this.publishTime = res.data.createTime
-        }else {
+        } else {
           this.$message.error(res.msg)
         }
       })

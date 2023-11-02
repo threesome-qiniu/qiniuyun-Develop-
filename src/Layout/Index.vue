@@ -6,6 +6,7 @@
       <el-container class="is-vertical">
         <Header :user="user"></Header>
         <el-main>
+<!--          路由-->
           <router-view/>
         </el-main>
         <el-footer style="backdrop-filter: blur(10px)">Footer</el-footer>
@@ -16,17 +17,7 @@
 <script>
 import Aside from "@/components/Aside.vue"
 import Header from "@/components/Header.vue"
-
 import {ElMessage} from "element-plus";
-
-import {
-  Check,
-  Delete,
-  Edit,
-  Message,
-  Search,
-  Star,
-} from '@element-plus/icons-vue'
 
 export default {
   name: 'Home',
