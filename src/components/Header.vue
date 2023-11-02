@@ -38,7 +38,7 @@ export default {
   name: "Header",
   components: {Message},
   props: {
-    user: Object
+    // user: Object
   },
   data() {
     return {}
@@ -50,11 +50,8 @@ export default {
 <style scoped>
 .niuyin-header {
   text-align: right;
-}
-
-.el-header {
   position: relative;
-  color: var(--el-text-color-primary);
+  backdrop-filter: blur(20px);
 
   .toolbar {
     display: inline-flex;
@@ -63,6 +60,6 @@ export default {
     height: 100%;
     right: 20px;
   }
-}
 
+}
 </style>

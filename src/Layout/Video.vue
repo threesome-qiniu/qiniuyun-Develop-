@@ -1,62 +1,52 @@
 <template>
-  <div style="width: 90%;float: left">
-    <div class="video-container">
-      <video class="video-player" autoplay
-             :src="videoUrl"></video>
-    </div>
-  </div>
-  <div style="width: 10%;float: right;">
-    <div style="margin: 0 auto">
-      <el-row>
-        <el-button @click="getPreviousVideo" type="warning" :icon="ArrowUpBold" circle/>
-      </el-row>
-      <el-row>
-        <el-button @click="getNextVideo" type="primary" :icon="ArrowDownBold" circle/>
-      </el-row>
-    </div>
-  </div>
+  <VideoPlayer
+      v-if="showVideoPlayer"
+      :autoPlay="autoPlay"
+      :video-url="videoUrl"
+      @reloadVideoFeed="reloadVideoFeedEmit"
+  ></VideoPlayer>
 </template>
 
 <script>
-import {ElMessage} from 'element-plus'
+import VideoPlayer from "@/components/VideoPlayer.vue";
 import {videoFeed} from "@/api/video"
-import {ArrowDownBold, ArrowUpBold} from "@element-plus/icons-vue";
 
 export default {
   name: 'Video',
-  computed: {
-    ArrowDownBold() {
-      return ArrowDownBold
-    },
-    ArrowUpBold() {
-      return ArrowUpBold
-    }
-  },
+  components: {VideoPlayer},
   data() {
     return {
+      autoPlay: true, // 自动播放视频
+      showVideoPlayer: true,
+      publishTime: undefined,
       videoUrl: undefined,
-      publishTime: new Date()
     }
   },
   created() {
     this.getVideoFeed()
   },
+  mounted() {
+  },
   methods: {
     getVideoFeed() {
       videoFeed(this.publishTime).then(res => {
         if (res.code === 200) {
-          // console.log(res.data.videoUrl)
+          console.log(res.data.videoUrl)
           this.videoUrl = res.data.videoUrl
           this.publishTime = res.data.createTime
           // console.log(res)
         }
       })
     },
-    getPreviousVideo() {
-
+    autoPlayVideo(val) {
+      this.autoPlay = val;
     },
-    getNextVideo() {
-      videoFeed(this.publishTime)
+    reloadVideoFeedEmit(val) {
+      this.showVideoPlayer = val;
+      this.$nextTick(() => {
+        this.showVideoPlayer = true;
+        this.getVideoFeed();
+      });
     }
   }
 }

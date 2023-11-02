@@ -30,11 +30,10 @@ import {
 export default {
   name: 'Home',
   components: {Aside, Header},
-
   data() {
     return {
       siteTitle: "牛音",
-      user: Object,
+      user: {},
       videoUrl: undefined,
       publishTime: new Date()
     }
