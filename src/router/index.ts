@@ -13,10 +13,10 @@ const router = createRouter({
 
             children: [
                 {path: '', component: () => import('@/Layout/Video.vue')},
-                {path: 'user', component: () => import('@/Layout/User.vue')}
+                {path: 'user', component: () => import('@/Layout/User.vue')},
+                {path: '/publish', component: () => import('@/Layout/Publish.vue')},
             ]
         },
-        {path: '/publish', component: () => import('@/Layout/Publish.vue')},
 
     ],
 });
