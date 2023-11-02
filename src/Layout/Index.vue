@@ -1,0 +1,61 @@
+<template>
+  <!--  首页-->
+  <div class="niuyin">
+    <el-container class="layout-container" style="height: 100vh">
+      <Aside :siteTitle="siteTitle"></Aside>
+      <el-container class="is-vertical">
+        <Header :user="user"></Header>
+        <el-main>
+<!--          路由-->
+          <router-view/>
+        </el-main>
+        <el-footer style="backdrop-filter: blur(10px)">Footer</el-footer>
+      </el-container>
+    </el-container>
+  </div>
+</template>
+<script>
+import Aside from "@/components/Aside.vue"
+import Header from "@/components/Header.vue"
+import {ElMessage} from "element-plus";
+
+export default {
+  name: 'Home',
+  components: {Aside, Header},
+  data() {
+    return {
+      siteTitle: "牛音",
+      user: {},
+      videoUrl: undefined,
+      publishTime: new Date()
+    }
+  },
+  created() {
+    this.showMsg()
+  },
+  methods: {
+    showMsg() {
+      ElMessage('欢迎来到牛音')
+      this.$router.push('/')
+    }
+  }
+
+}
+
+</script>
+
+<style lang='scss'>
+//@import "~@/assets/styles/index.scss";
+.niuyin {
+  background-image: url("../assets/images/bg.png");
+}
+
+.el-footer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  right: 20px;
+}
+
+</style>

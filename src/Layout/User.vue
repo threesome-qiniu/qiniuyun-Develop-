@@ -1,16 +1,14 @@
 <template>
-  <div>11</div>
+  <div>用户页面</div>
 </template>
 
 <script>
 export default {
-    name:'UsrIndex'
+  name: 'User'
 }
 
 </script>
 
 <style lang='less' scoped>
-
-
 
 </style>
