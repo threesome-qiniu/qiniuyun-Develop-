@@ -14,7 +14,6 @@
   </div>
 </template>
 <script>
-import {ArrowDownBold, ArrowUpBold} from "@element-plus/icons-vue";
 
 export default {
   name: "VideoPlayer",
@@ -31,6 +30,7 @@ export default {
       autoPlayVideo: this.autoPlay,
     }
   },
+  emits: ['reloadVideoFeed'],
   created() {
   },
   mounted() {
@@ -45,19 +45,9 @@ export default {
     this.$refs.video.addEventListener("pause", () => {
       this.videoPlay = "pause";
       this.currentTime = this.$refs.video.currentTime;
-      // if (this.autoPlay === true) {
-      //   if (this.$refs.video.duration === this.$refs.video.currentTime) {
-      //     this.autoReloadVideo();
-      //   }
-      // }
     });
   },
   methods: {
-    autoReloadVideo() {
-      // alert("自动播放开始");
-      this.showVideo = false;
-      this.$emit("reloadV1", this.showVideo);
-    },
     getPreviousVideo() {
     },
     getNextVideo() {

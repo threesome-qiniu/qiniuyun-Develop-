@@ -95,17 +95,15 @@ export default {
     },
     // 验证视频格式
     beforeUploadVideo(file) {
-      if (
-          [
-            'video/mp4',
-            'video/ogg',
-            'video/flv',
-            'video/avi',
-            'video/wmv',
-            'video/rmvb',
-            'video/mkv'
-          ].indexOf(file.type) === -1
-      ) {
+      if ([
+        'video/mp4',
+        'video/ogg',
+        'video/flv',
+        'video/avi',
+        'video/wmv',
+        'video/rmvb',
+        'video/mkv'
+      ].indexOf(file.type) === -1) {
         this.$message.error('请上传正确的视频格式')
         return false
       }
@@ -116,8 +114,7 @@ export default {
       this.videoFlag = true
       this.videoUploadPercent = Math.floor(event.percent)
     },
-
-    // 获取上传图片地址
+    // 获取上传地址
     handleVideoSuccess(res, file) {
       this.videoFlag = false
       this.videoUploadPercent = 0
@@ -141,36 +138,6 @@ export default {
 </script>
 
 <style scoped lang="less">
-.avatar-uploader-icon {
-  border: 1px dashed #d9d9d9 !important;
-}
-
-.avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9 !important;
-  border-radius: 6px !important;
-  position: relative !important;
-  overflow: hidden !important;
-}
-
-.avatar-uploader .el-upload:hover {
-  border: 1px dashed #d9d9d9 !important;
-  border-color: #409eff;
-}
-
-.avatar-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  width: 300px;
-  height: 178px;
-  line-height: 178px;
-  text-align: center;
-}
-
-.avatar {
-  width: 300px;
-  height: 178px;
-  display: block;
-}
 
 </style>
 

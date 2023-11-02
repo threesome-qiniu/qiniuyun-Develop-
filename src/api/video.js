@@ -21,8 +21,6 @@ export function videoMypage(data) {
     })
 }
 
-// 上传视频
-
 
 // 发布视频
 export function publishVideo(data) {

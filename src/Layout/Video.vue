@@ -1,4 +1,5 @@
 <template>
+<!--  视频播放-->
   <VideoPlayer
       v-if="showVideoPlayer"
       :autoPlay="autoPlay"
@@ -34,6 +35,8 @@ export default {
           console.log(res.data.videoUrl)
           this.videoUrl = res.data.videoUrl
           this.publishTime = res.data.createTime
+        }else {
+          this.$message.error(res.msg)
         }
       })
     },
@@ -54,7 +57,6 @@ export default {
 
 <style lang='less' scoped>
 .video-container {
-  //background: #07A7E1;
   backdrop-filter: blur(10px);
   border-radius: 1rem;
   margin: 0 auto;
