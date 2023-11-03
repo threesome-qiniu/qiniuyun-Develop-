@@ -96,7 +96,9 @@ export default {
 }
 
 .tab_main {
-//display: flex; //justify-content: center; //align-items: center;
+//display: flex;
+//justify-content: center;
+//align-items: center;
 }
 
 /* tab栏左边区域 */
