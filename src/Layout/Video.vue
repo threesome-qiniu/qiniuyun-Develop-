@@ -56,15 +56,5 @@ export default {
 </script>
 
 <style lang='less' scoped>
-.video-container {
-  backdrop-filter: blur(10px);
-  border-radius: 1rem;
-  margin: 0 auto;
-  height: calc(100vh - 160px);
-}
 
-.video-player {
-  height: 100%;
-  width: 100%
-}
 </style>

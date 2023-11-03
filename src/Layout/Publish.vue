@@ -1,47 +1,43 @@
 <template>
-  <div class="publish-container" style="margin: 100px auto">
-    <!--    <el-dialog :title="title" :visible.sync="open" width="60%" append-to-body>-->
-    <el-form :model="videoForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+  <div class="publish-container">
+    <el-form :model="videoForm" :rules="rules" ref="ruleForm" label-width="100px">
       <el-form-item label="上传视频" prop="videoUrl">
         <!-- action必选参数, 上传的地址 -->
-        <el-upload class="avatar-uploader el-upload--text"
+        <el-upload class="video-uploader"
                    :action="videoUploadUrl"
                    :show-file-list="false"
+                   :headers="headers"
                    :on-success="handleVideoSuccess"
                    :before-upload="beforeUploadVideo"
                    :on-progress="uploadVideoProcess">
-          <video v-if="videoForm.videoUrl != '' && videoFlag == false"
+          <video v-if="videoForm.videoUrl !== '' && videoFlag === false"
                  :src="videoForm.videoUrl"
-                 class="avatar"
-                 controls="controls"
-          >您的浏览器不支持视频播放
-          </video>
-          <i v-else-if="videoForm.videoUrl == '' && videoFlag == false"
-             class="el-icon-plus avatar-uploader-icon"></i>
-          <el-progress v-if="videoFlag == true"
+                 class="video"
+                 controls
+          ></video>
+          <div v-else-if="videoForm.videoUrl === '' && videoFlag === false" class="el-icon-plus video-uploader-icon">
+            <Plus style="width: 1em; height: 1em;"/>
+          </div>
+          <el-progress v-if="videoFlag === true"
                        type="circle"
                        :percentage="videoUploadPercent"
                        style="margin-top:30px;"></el-progress>
+          <img v-if="videoForm.videoUrl !== '' && videoFlag === false"
+               :src="videoForm.coverImage"
+               class="video"
+          />
         </el-upload>
       </el-form-item>
-      <el-form-item label="视频标题" prop="name">
-        <el-input v-model="videoForm.name"></el-input>
+      <el-form-item label="视频标题" prop="videoTitle">
+        <el-input v-model="videoForm.videoTitle"></el-input>
       </el-form-item>
-      <el-form-item label="视频分类" prop="resource">
-        <el-radio-group v-model="videoForm.resource">
-          <el-radio label="VLOG"></el-radio>
-          <el-radio label="番剧"></el-radio>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="视频简介" prop="desc">
-        <el-input type="textarea" v-model="videoForm.desc"></el-input>
+      <el-form-item label="视频简介" prop="videoDesc">
+        <el-input type="textarea" v-model="videoForm.videoDesc"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">发布</el-button>
       </el-form-item>
     </el-form>
-    <!--    </el-dialog>-->
-    <!--    <el-button @click="clickPublishVideo" type="primary">发布</el-button>-->
   </div>
 </template>
 
@@ -56,24 +52,26 @@ export default {
   data() {
     return {
       title: "发布视频",
-      open: false,
       videoFlag: false,
-      form: {},
       videoUploadUrl: "http://39.101.67.45:9090/video/api/v1/upload",
+      headers: {
+        Authorization: "Bearer eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAC2LUQrDIBBE77LfEap165rbaLOCgSSSNdBQevduIPM1b4b3hblXGAEDlXd4kiFnvfGFHyYHZFMwFp8tky4wQE0dRvuKpHERB5Ajqy2ndF6uX0Rx385pWxXTMSmm1rTzp6kaCN2tVv3c7w8QZaD7gQAAAA.yZsuNb-qHfy8jBDmpVsTtz2_OYiPmHtwS_2HHpXsxfln1HxEHxpMO0qSN11KbPVVukZO0MuomaeFzrgJAMDMhA",
+      },
       videoUploadPercent: undefined,
+      // coverImage: '',
       videoForm: {
-        name: '',
+        videoTitle: '',
         videoUrl: '',
-        resource: '',
-        desc: ''
+        coverImage: '',
+        videoDesc: ''
       },
       rules: {
-        name: [
-          {required: true, message: '请输入活动名称', trigger: 'blur'},
-          {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur'}
+        videoTitle: [
+          {required: true, message: '请输入视频标题', trigger: 'blur'},
+          {min: 1, max: 30, message: '长度在 1 到 30 个字符', trigger: 'blur'}
         ],
-        desc: [
-          {required: true, message: '请填写活动形式', trigger: 'blur'}
+        videoDesc: [
+          {required: true, message: '请填写视频简介', trigger: 'blur'}
         ]
       }
     };
@@ -81,12 +79,20 @@ export default {
   created() {
   },
   mounted() {
+    this.$nextTick(() => {
+      this.showVideoPlayer = true;
+    });
   },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!');
+          // alert('submit!');
+          publishVideo(this.videoForm).then(res => {
+            if (res.code === 200) {
+              console.log(res)
+            }
+          })
         } else {
           console.log('error submit!!');
           return false;
@@ -118,54 +124,50 @@ export default {
     handleVideoSuccess(res, file) {
       this.videoFlag = false
       this.videoUploadPercent = 0
-      if (res.status === 200) {
+      if (res.code === 200) {
         console.log(res.data)
-        this.videoForm.videoUrl = res.data.videoUrl
+        this.videoForm.videoUrl = res.data
+        this.videoForm.coverImage = res.data + "?vframe/jpg/offset/1"
       } else {
         this.$message.error('视频上传失败，请重新上传！')
       }
     },
-    clickPublishVideo() {
-      this.open = true
-      // publishVideo(this.form).then(res => {
-      //   if (res.code === 200) {
-      //     console.log(res)
-      //   }
-      // })
-    }
   }
 };
 </script>
 
 <style scoped lang="less">
-.avatar-uploader-icon {
-  border: 1px dashed #d9d9d9 !important;
+.publish-container {
+  border-radius: 1rem;
+  height: calc(100vh - 160px);
+  backdrop-filter: blur(20px);
 }
 
-.avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9 !important;
-  border-radius: 6px !important;
-  position: relative !important;
-  overflow: hidden !important;
+.video-uploader {
+  width: 100%;
+
+  .video-uploader-icon {
+    border: 2px dashed darkblue !important;
+    border-radius: 0.5rem;
+    font-size: 28px;
+    color: #8c939d;
+    width: 100%;
+    height: calc(100vw / 4);
+    line-height: 180px;
+    text-align: center;
+  }
+
 }
 
-.avatar-uploader .el-upload:hover {
-  border: 1px dashed #d9d9d9 !important;
+.video-uploader .el-upload:hover {
+  border: 2px dashed #d9d9d9 !important;
   border-color: #409eff;
 }
 
-.avatar-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  width: 300px;
-  height: 178px;
-  line-height: 178px;
-  text-align: center;
-}
-
-.avatar {
-  width: 300px;
-  height: 178px;
+.video {
+  width: 320px;
+  height: 180px;
+  border-radius: 1rem;
   display: block;
 }
 

@@ -6,7 +6,7 @@
       <el-container class="is-vertical">
         <Header :user="user"></Header>
         <el-main>
-<!--          路由-->
+          <!--          路由-->
           <router-view/>
         </el-main>
         <el-footer style="backdrop-filter: blur(10px)">Footer</el-footer>
@@ -27,7 +27,6 @@ export default {
       siteTitle: "牛音",
       user: {},
       videoUrl: undefined,
-      publishTime: new Date()
     }
   },
   created() {
@@ -35,7 +34,7 @@ export default {
   },
   methods: {
     showMsg() {
-      ElMessage('欢迎来到牛音')
+      // ElMessage('欢迎来到牛音')
       this.$router.push('/')
     }
   }
