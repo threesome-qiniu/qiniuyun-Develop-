@@ -71,13 +71,20 @@ export default {
       console.log(res);
     },
     async upload(e:any){
+     
       const fd = new FormData()
-      fd.append('file',e.target.files[0])
+      fd.set('file',e.target.files[0])
+     
       const res = await request.post('/user/api/v1/avatar',{
         data:{
           fd
         }
+      },{
+        headers:{
+          'Content-Type': 'multipart/form-data'
+        }
       })
+     
       
       console.log(res);
 
