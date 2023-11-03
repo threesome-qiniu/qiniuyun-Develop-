@@ -8,7 +8,7 @@ const instance = axios.create({
 
 // 添加请求拦截器
 instance.interceptors.request.use(config => {
-    config.headers['Content-Type'] = 'application/json;charset=utf-8';
+    // config.headers['Content-Type'] = 'application/json;charset=utf-8';
     // // 在发送请求之前做些什么
     // // 是否需要设置 token
     // const isToken = (config.headers || {}).isToken === false
