@@ -15,18 +15,8 @@ const router = createRouter({
         { path: "", component: () => import("@/Layout/Video.vue") },
         { path: "user", component: () => import("@/Layout/User.vue") },
         {
-          path: "/",
-          name: "Index",
-          component: () => import("@/Layout/Index.vue"),
-
-          children: [
-            { path: "", component: () => import("@/Layout/Video.vue") },
-            { path: "user", component: () => import("@/Layout/User.vue") },
-            {
-              path: "/publish",
-              component: () => import("@/Layout/Publish.vue"),
-            },
-          ],
+          path: "publish",
+          component: () => import("@/Layout/Publish.vue"),
         },
       ],
     },
