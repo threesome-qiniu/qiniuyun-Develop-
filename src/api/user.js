@@ -14,8 +14,8 @@ export function login(username, password) {
     })
 }
 
-export const userLogin = (username,password)=>{
-    return request.post('user/api/v1/login',{
+export const userLogin = (username, password) => {
+    return request.post('user/api/v1/login', {
         username,
         password
     })
@@ -46,3 +46,25 @@ export function logout() {
     })
 }
 
+
+//更新用户信息
+
+export function userupdate(nickname, email, telephone, avatar, sex) {
+    return request.put('/user/api/v1/update', {
+        nickName: nickname,
+        email,
+        telephone,
+        avatar,
+        sex
+
+    })
+}
+
+//修改用户头像
+export function avatar(file) {
+    return request.post('/user/api/v1/avatar', {
+        data: {
+            file
+        }
+    })
+}
