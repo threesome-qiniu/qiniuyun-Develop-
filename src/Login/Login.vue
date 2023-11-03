@@ -58,6 +58,7 @@ import {reactive} from 'vue'
 import request from '../utils/request'
 import {ElMessage} from 'element-plus'
 import {userLogin} from '@/api/user'
+import {useUserStore} from '@/store/useUserStore'
 
 export default {
   name: 'LoginIndex',
@@ -70,9 +71,11 @@ export default {
 
   },
   methods: {
+   
 
     // 登录
     async userLogin() {
+      
       const res = await userLogin(this.loginform.name, this.loginform.password)
       if (res.code != 200) {
         ElMessage({
@@ -81,6 +84,9 @@ export default {
         })
 
       } else {
+        const userstore = useUserStore()
+        userstore.settoken(res.data.token)
+        console.log(localStorage.getItem('user'));
         ElMessage({
           message: res.msg,
           type: 'success',
@@ -104,19 +110,19 @@ export default {
         confirmPassword: this.registerform.checkPass
       })
       // 消息提示 判断code值
-      const {code, msg} = res
+      
       console.log(res);
-      if (code != 200) {
+      if (res.code != 200) {
         this.login = false
         ElMessage({
-          message: msg,
+          message: res.msg,
           type: 'warning',
         })
 
       } else {
         this.login = true
         ElMessage({
-          message: msg,
+          message: res.msg,
           type: 'success',
         })
 

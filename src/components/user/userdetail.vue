@@ -31,6 +31,10 @@
 
 
         <input @change="upload" id="img" type="file" class="upload">
+        <div style="width: 80px;height: 80px;">
+          <img style="max-width: 100%; height: auto;" src="http://s3adm4szs.hb-bkt.clouddn.com/2023/11/03/a56f8ea051d54425bd071f2908834a49.png">
+        </div>
+       
       </div>
     </el-col>
   </el-row>
@@ -39,7 +43,7 @@
 <script lang="ts">
 import { reactive } from 'vue'
 import { userupdate } from '@/api/user'
-import  request  from '@/utils/request'
+import request from '@/utils/request'
 
 export default {
   name: 'userDetail',
@@ -49,7 +53,7 @@ export default {
       email: '',
       gender: '',
       telnumber: '',
-      avatar:''
+      avatar: ''
 
 
     })
@@ -59,37 +63,37 @@ export default {
         { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
       ],
       name: [{ required: true, message: '请输入昵称', trigger: 'blur' }],
-      telnumber: [{ required:true,min: 3, max: 11, message: '必须为手机号形式', trigger: 'blur' }]
+      telnumber: [{ required: true, min: 3, max: 11, message: '必须为手机号形式', trigger: 'blur' }]
     }
     return { form, rules }
   },
   methods: {
     async submit() {
-      const res = await userupdate(this.form.name, this.form.email, this.form.telnumber,this.form.avatar,this.form.gender)
-      
-      console.log(this.form.avatar);
+      const res = await userupdate(this.form.name, this.form.email, this.form.telnumber, 'http://s3adm4szs.hb-bkt.clouddn.com/2023/11/03/a56f8ea051d54425bd071f2908834a49.png', this.form.gender)
+
+
       console.log(res);
     },
-    async upload(e:any){
-     
+    async upload(e: any) {
+
       const fd = new FormData()
-      fd.set('file',e.target.files[0])
-     
-      const res = await request.post('/user/api/v1/avatar',{
-        data:{
+      fd.set('file', e.target.files[0])
+
+      const res = await request.post('/user/api/v1/avatar', {
+        data: {
           fd
         }
-      },{
-        headers:{
+      }, {
+        headers: {
           'Content-Type': 'multipart/form-data'
         }
       })
-     
-      
+
+
       console.log(res);
 
     }
-  
+
   }
 
 
