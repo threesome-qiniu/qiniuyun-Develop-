@@ -9,3 +9,10 @@ export function searchVideo(data) {
     })
 }
 
+// 搜索记录
+export function searchHistoryLoad() {
+    return request({
+        url: '/search/api/v1/history/load',
+        method: 'get',
+    })
+}

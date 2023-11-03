@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import VideoPlayer from "@/components/VideoPlayer.vue";
+import VideoPlayer from "@/components/video/VideoPlayer.vue";
 import {videoFeed} from "@/api/video"
 
 export default {

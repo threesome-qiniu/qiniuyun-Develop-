@@ -18,3 +18,14 @@
 .el-upload {
     width: 100%;
 }
+
+.el-input__wrapper {
+    border-radius: 1rem 0 0 1rem;
+}
+
+.el-input__inner {
+    height: 38px;
+}
+.keyword-hint {
+    color: red;
+}

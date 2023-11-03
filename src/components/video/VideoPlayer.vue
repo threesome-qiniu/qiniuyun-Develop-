@@ -35,18 +35,18 @@ export default {
     this.init()
   },
   mounted() {
-    this.$refs.video.addEventListener("play", () => {
-      this.videoPlay = "play";
-      this.duration = this.$refs.video.duration;
-      this.currentTime = this.$refs.video.currentTime;
-      console.log(this.duration)
-      console.log(this.currentTime)
-    });
-    // 监听视频暂停
-    this.$refs.video.addEventListener("pause", () => {
-      this.videoPlay = "pause";
-      this.currentTime = this.$refs.video.currentTime;
-    });
+    // this.$refs.video.addEventListener("play", () => {
+    //   this.videoPlay = "play";
+    //   this.duration = this.$refs.video.duration;
+    //   this.currentTime = this.$refs.video.currentTime;
+    //   console.log(this.duration)
+    //   console.log(this.currentTime)
+    // });
+    // // 监听视频暂停
+    // this.$refs.video.addEventListener("pause", () => {
+    //   this.videoPlay = "pause";
+    //   this.currentTime = this.$refs.video.currentTime;
+    // });
     //监听鼠标滚动事件
     window.addEventListener('mousewheel', this.handleScroll) // 监听滚动事件，然后用handleScroll这个方法进行相应的处理
 

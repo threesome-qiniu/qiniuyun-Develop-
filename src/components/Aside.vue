@@ -3,7 +3,9 @@
   <el-aside width="200px">
     <el-scrollbar>
       <div style="width:100%;overflow:hidden;">
-        <img style="width: auto;height: 60px;margin: 0 auto;display: block" src="@/assets/logo/logo.png">
+        <router-link class="link-type" :to="'/'">
+          <img style="width: auto;height: 60px;margin: 0 auto;display: block" src="@/assets/logo/logo.png">
+        </router-link>
       </div>
       <!-- tab栏区域 -->
       <div class="b-wrap tab_main">

@@ -146,6 +146,7 @@ export default {
   border-radius: 1rem;
   height: calc(100vh - 160px);
   backdrop-filter: blur(20px);
+  padding: 2rem;
 }
 
 .video-uploader {
