@@ -48,6 +48,7 @@ export default {
 //@import "~@/assets/styles/index.scss";
 .niuyin {
   background-image: url("../assets/images/bg.png");
+ 
 }
 
 .el-footer {
