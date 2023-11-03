@@ -46,6 +46,13 @@ instance.interceptors.response.use(res => {
     // 未认证
     if (code === 401) {
         // 展示重新登陆逻辑
+        MessageBox.confirm('登录状态已过期，是否选择重新登录', '系统提示', {
+            confirmButtonText: '重新登录',
+            cancelButtonText: '取消',
+            type: 'warning'
+        }).then(() => {
+            location.href = '/index';
+        });
         return Promise.reject('请重新登录。')
     } else if (code === 500) {
         Message({
