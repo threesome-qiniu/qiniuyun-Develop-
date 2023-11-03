@@ -2,6 +2,7 @@ import axios from 'axios'
 import ElementPlus from 'element-plus'
 import errorCode from '@/utils/errorCode'
 import {Message, MessageBox} from "@element-plus/icons-vue";
+import {useUserStore} from "@/store/useUserStore";
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 const instance = axios.create({
