@@ -1,14 +1,18 @@
 import axios from 'axios'
 import ElementPlus from 'element-plus'
+import errorCode from '@/utils/errorCode'
+import {Message, MessageBox} from "@element-plus/icons-vue";
 
+axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 const instance = axios.create({
-    baseURL: 'http://39.101.67.45:9090',
+    baseURL: 'http://localhost:9090',
+    // baseURL: 'http://39.101.67.45:9090',
     timeout: 5000,
 });
 
 // 添加请求拦截器
 instance.interceptors.request.use(config => {
-    config.headers['Content-Type'] = 'application/json;charset=utf-8';
+    // config.headers['Content-Type'] = 'application/json;charset=utf-8';
     // // 在发送请求之前做些什么
     // // 是否需要设置 token
     // const isToken = (config.headers || {}).isToken === false
@@ -22,10 +26,33 @@ instance.interceptors.request.use(config => {
 });
 
 // 添加响应拦截器
-instance.interceptors.response.use(function (response) {
-    // 2xx 范围内的状态码都会触发该函数。
-    // 对响应数据做点什么
-    return response.data;
+instance.interceptors.response.use(res => {
+    // 未设置状态码则默认成功状态
+    const code = res.data.code || 200;
+    // 获取错误信息
+    const msg = errorCode[code] || res.data.msg || errorCode['default']
+    // 二进制数据则直接返回
+    if (res.request.responseType === 'blob' || res.request.responseType === 'arraybuffer') {
+        return res.data
+    }
+    // 未认证
+    if (code === 401) {
+        // 展示重新登陆逻辑
+        return Promise.reject('请重新登录。')
+    } else if (code === 500) {
+        Message({
+            message: msg,
+            type: 'error'
+        })
+        return Promise.reject(new Error(msg))
+    } else if (code !== 200) {
+        Notification.error({
+            title: msg
+        })
+        return Promise.reject('error')
+    } else {
+        return res.data
+    }
 }, function (error) {
     // 超出 2xx 范围的状态码都会触发该函数。
     // 对响应错误做点什么

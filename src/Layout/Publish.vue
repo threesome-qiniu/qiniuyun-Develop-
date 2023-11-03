@@ -7,6 +7,7 @@
                    :action="videoUploadUrl"
                    :show-file-list="false"
                    :headers="headers"
+                   :limit="1"
                    :on-success="handleVideoSuccess"
                    :before-upload="beforeUploadVideo"
                    :on-progress="uploadVideoProcess">
@@ -46,6 +47,7 @@
 import {publishVideo} from "@/api/video";
 // 七牛引入
 import * as qiniu from "qiniu-js";
+import {ElMessage} from "element-plus";
 
 export default {
   name: "Publish",
@@ -53,7 +55,7 @@ export default {
     return {
       title: "发布视频",
       videoFlag: false,
-      videoUploadUrl: "http://39.101.67.45:9090/video/api/v1/upload",
+      videoUploadUrl: "http://localhost:9090/video/api/v1/upload",
       headers: {
         Authorization: "Bearer eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAC2LUQrDIBBE77LfEap165rbaLOCgSSSNdBQevduIPM1b4b3hblXGAEDlXd4kiFnvfGFHyYHZFMwFp8tky4wQE0dRvuKpHERB5Ajqy2ndF6uX0Rx385pWxXTMSmm1rTzp6kaCN2tVv3c7w8QZaD7gQAAAA.yZsuNb-qHfy8jBDmpVsTtz2_OYiPmHtwS_2HHpXsxfln1HxEHxpMO0qSN11KbPVVukZO0MuomaeFzrgJAMDMhA",
       },
@@ -90,7 +92,10 @@ export default {
           // alert('submit!');
           publishVideo(this.videoForm).then(res => {
             if (res.code === 200) {
-              console.log(res)
+              ElMessage({
+                message: res.msg,
+                type: 'success',
+              })
             }
           })
         } else {
@@ -126,8 +131,8 @@ export default {
       this.videoUploadPercent = 0
       if (res.code === 200) {
         console.log(res.data)
-        this.videoForm.videoUrl = res.data
-        this.videoForm.coverImage = res.data + "?vframe/jpg/offset/1"
+        this.videoForm.videoUrl = res.data.videoUrl
+        this.videoForm.coverImage = res.data.vframe
       } else {
         this.$message.error('视频上传失败，请重新上传！')
       }
@@ -152,7 +157,7 @@ export default {
     font-size: 28px;
     color: #8c939d;
     width: 100%;
-    height: calc(100vw / 4);
+    height: calc(100vw / 7);
     line-height: 180px;
     text-align: center;
   }
