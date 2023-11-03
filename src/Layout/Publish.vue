@@ -48,6 +48,7 @@ import {publishVideo} from "@/api/video";
 // 七牛引入
 import * as qiniu from "qiniu-js";
 import {ElMessage} from "element-plus";
+import {useUserStore} from "@/store/useUserStore";
 
 export default {
   name: "Publish",
@@ -57,7 +58,7 @@ export default {
       videoFlag: false,
       videoUploadUrl: "http://localhost:9090/video/api/v1/upload",
       headers: {
-        Authorization: "Bearer eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAC2LUQrDIBBE77LfEap165rbaLOCgSSSNdBQevduIPM1b4b3hblXGAEDlXd4kiFnvfGFHyYHZFMwFp8tky4wQE0dRvuKpHERB5Ajqy2ndF6uX0Rx385pWxXTMSmm1rTzp6kaCN2tVv3c7w8QZaD7gQAAAA.yZsuNb-qHfy8jBDmpVsTtz2_OYiPmHtwS_2HHpXsxfln1HxEHxpMO0qSN11KbPVVukZO0MuomaeFzrgJAMDMhA",
+        Authorization: 'Bearer ' + useUserStore().token,
       },
       videoUploadPercent: undefined,
       // coverImage: '',
