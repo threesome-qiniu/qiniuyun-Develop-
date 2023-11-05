@@ -71,11 +71,11 @@ export default {
 
   },
   methods: {
-   
+
 
     // 登录
     async userLogin() {
-      
+
       const res = await userLogin(this.loginform.name, this.loginform.password)
       if (res.code != 200) {
         ElMessage({
@@ -110,7 +110,7 @@ export default {
         confirmPassword: this.registerform.checkPass
       })
       // 消息提示 判断code值
-      
+
       console.log(res);
       if (res.code != 200) {
         this.login = false
