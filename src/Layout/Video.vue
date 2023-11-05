@@ -49,7 +49,7 @@ export default {
         if (res.code === 200 && res.data != null) {
           // console.log(res.data)
           this.videoList = res.data
-          this.publishTime = res.data[4].createTime
+          this.publishTime = res.data[this.videoList.length-1].createTime
         } else {
           this.$message.error(res.msg)
         }

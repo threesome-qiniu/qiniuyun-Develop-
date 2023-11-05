@@ -57,7 +57,7 @@
 import {reactive} from 'vue'
 import request from '../utils/request'
 import {ElMessage} from 'element-plus'
-import {userLogin} from '@/api/user'
+import {userLogin, getInfo} from '@/api/user'
 import {useUserStore} from '@/store/useUserStore'
 
 export default {
@@ -86,7 +86,8 @@ export default {
       } else {
         const userstore = useUserStore()
         userstore.settoken(res.data.token)
-        console.log(localStorage.getItem('user'));
+        // console.log(localStorage.getItem('user'));
+        this.getUserInfo();
         ElMessage({
           message: res.msg,
           type: 'success',
@@ -94,9 +95,16 @@ export default {
         await this.$router.push('/')
 
       }
-      console.log(res);
+      // console.log(res);
 
 
+    },
+    getUserInfo() {
+      getInfo().then(res => {
+        if (res.code === 200) {
+          localStorage.setItem("userInfo", JSON.stringify(res.data))
+        }
+      })
     },
     registerUser() {
       this.login = false

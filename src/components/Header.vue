@@ -21,11 +21,11 @@
             @keyup.enter.native="searchConfirm"
             clearable
         >
-<!--          <template slot-scope="{ item }">-->
-<!--            <div class="search-history">-->
-<!--              <el-tag type="info">{{ item.keyword }}</el-tag>-->
-<!--            </div>-->
-<!--          </template>-->
+          <!--          <template slot-scope="{ item }">-->
+          <!--            <div class="search-history">-->
+          <!--              <el-tag type="info">{{ item.keyword }}</el-tag>-->
+          <!--            </div>-->
+          <!--          </template>-->
         </el-autocomplete>
 
         <el-button class="search-btn" type="info" plain @click="searchConfirm">
@@ -39,20 +39,21 @@
         </router-link>
       </div>
       <el-dropdown>
-        <el-icon style="margin: 0 10px">
-          <Message/>
-        </el-icon>
+        <router-link class="user-container" :to="'/user'">
+          <el-avatar :src="user.avatar"/>
+          <span style="padding-left: 10px">{{ user.nickName }}</span>
+        </router-link>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>View</el-dropdown-item>
-            <el-dropdown-item>Add</el-dropdown-item>
-            <el-dropdown-item>Delete</el-dropdown-item>
+            <el-dropdown-item>
+              <router-link class="link-type" @click="handleLogout" :to="'/login'"><span>退出登录</span>
+              </router-link>
+            </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
       <!--      <el-image :src="user.avatar"></el-image>-->
-      <router-link class="link-type" :to="'/user'"><span>roydon</span>
-      </router-link>
+
     </div>
   </el-header>
 </template>
@@ -66,12 +67,14 @@ import {
   Search,
   Star,
 } from '@element-plus/icons-vue'
+import {useUserStore} from "@/store/useUserStore";
+import {getInfo} from "@/api/user.js";
 
 export default {
   name: "Header",
   components: {Message},
   props: {
-    // user: Object
+    // user: Object,
     // 热搜数据
     hotsearch: {
       type: Array,
@@ -88,6 +91,7 @@ export default {
   },
   data() {
     return {
+      user: localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo")) : {},
       // 输入框的数据
       searchData: "",
       // 默认搜索词
@@ -95,8 +99,17 @@ export default {
     }
   },
   created() {
+    // this.getUserInfo()
   },
   methods: {
+    // getUserInfo() {
+    //   localStorage.getItem("userInfo")
+    //   getInfo().then(res => {
+    //     if (res.code === 200) {
+    //       localStorage.setItem("userInfo", JSON.stringify(res.data))
+    //     }
+    //   })
+    // },
     // 输入框获取焦点时调用的方法
     querySearch(queryString, cb) {
       let results = this.searchHistory;
@@ -121,6 +134,12 @@ export default {
       // 跳转到搜索页面
       this.$router.push(`/videoSearch?keyword=${this.searchData}`);
     },
+
+    handleLogout() {
+      useUserStore().removetoken();
+      localStorage.removeItem("userInfo")
+      this.$router.push('/login');
+    }
 
   },
 }
@@ -184,6 +203,13 @@ export default {
   font-size: 24px;
   font-weight: 600;
   color: #2999d9;
+}
+
+.user-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
 }
 
 </style>

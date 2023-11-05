@@ -36,12 +36,26 @@ instance.interceptors.request.use(config => {
 // 添加响应拦截器
 instance.interceptors.response.use(res => {
     // 未设置状态码则默认成功状态
+    // console.log(res.data.msg)
     const code = res.data.code || 200;
     // 获取错误信息
     const msg = errorCode[code] || res.data.msg || errorCode['default']
     // 二进制数据则直接返回
     if (res.request.responseType === 'blob' || res.request.responseType === 'arraybuffer') {
         return res.data
+    }
+    if (res.data.msg === "用户未认证") {
+        console.log(res.data.msg)
+        location.href = '/login';
+        // 展示重新登陆逻辑
+        MessageBox.confirm('登录状态已过期，是否选择重新登录', '系统提示', {
+            confirmButtonText: '重新登录',
+            cancelButtonText: '取消',
+            type: 'warning'
+        }).then(() => {
+            location.href = '/login';
+        });
+        return Promise.reject('请重新登录。')
     }
     // 未认证
     if (code === 401) {
@@ -51,7 +65,7 @@ instance.interceptors.response.use(res => {
             cancelButtonText: '取消',
             type: 'warning'
         }).then(() => {
-            location.href = '/index';
+            location.href = '/login';
         });
         return Promise.reject('请重新登录。')
     } else if (code === 500) {
