@@ -287,7 +287,7 @@ export default {
   transition: all 0.5s;
 
   .video-container {
-    width: 90%;
+    width: 100%;
     float: left;
     border-radius: 1rem;
     margin: 0 auto;
@@ -322,7 +322,7 @@ export default {
       left: 0;
       top: 0;
       color: white;
-      width: 90%;
+      width: 100%;
       padding: 1rem;
       display: flex;
       justify-content: space-between;

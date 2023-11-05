@@ -5,7 +5,7 @@
                v-for="item in followList"
                :key="item.userId"
                shadow="hover">
-        <div class="user-info">
+        <div class="user-info" @click="getFollowedVideoList(item.userId)">
           <el-avatar class="user-avatar"
                      :src="item.avatar"
                      lazy/>
@@ -15,7 +15,7 @@
         </div>
       </el-card>
     </el-scrollbar>
-    <div class="video-container">
+    <div class="video-container" style="width: 80%">
       <video-player-carousel
           v-if="showVideoPlayer"
           :video-list="videoList"
@@ -42,7 +42,7 @@ export default {
       },
       followTotal: 0,
       followList: [],
-      videoList:[],
+      videoList: [],
       userPageQueryParams: {
         videoTitle: "",
         pageNum: 1,
@@ -62,10 +62,12 @@ export default {
         }
       })
     },
-    getFollowedVideoList(){
-      videoUserpage().then(res=>{
-        if(res.code===200){
-
+    getFollowedVideoList(userId) {
+      this.userPageQueryParams.userId = userId
+      videoUserpage(this.userPageQueryParams).then(res => {
+        if (res.code === 200) {
+          this.videoList = res.rows
+          this.showVideoPlayer = true
         }
       })
     },
@@ -90,7 +92,8 @@ export default {
 
 .user-card {
   border-radius: 1rem;
-  padding: 5px 0.5rem;
+  padding: 2px 0.5rem;
+  cursor: pointer;
 
   .user-info {
     display: flex;
@@ -109,6 +112,7 @@ export default {
 }
 
 .user-card:hover {
+  background-color: #5b5858;;
   backdrop-filter: blur(10px);
 }
 </style>
