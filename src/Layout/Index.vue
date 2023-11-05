@@ -53,7 +53,7 @@ export default {
 //@import "~@/assets/styles/index.scss";
 .niuyin {
   background-image: url("../assets/images/bg.png");
-
+  //background-color: #464545;;
 }
 
 .el-footer {

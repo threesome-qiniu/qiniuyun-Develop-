@@ -1,44 +1,46 @@
 <template>
   <div class="publish-container">
-    <el-form :model="videoForm" :rules="rules" ref="ruleForm" label-width="100px">
-      <el-form-item label="上传视频" prop="videoUrl">
-        <!-- action必选参数, 上传的地址 -->
-        <el-upload class="video-uploader"
-                   :action="videoUploadUrl"
-                   :show-file-list="false"
-                   :headers="headers"
-                   :limit="1"
-                   :on-success="handleVideoSuccess"
-                   :before-upload="beforeUploadVideo"
-                   :on-progress="uploadVideoProcess">
-          <video v-if="videoForm.videoUrl !== '' && videoFlag === false"
-                 :src="videoForm.videoUrl"
+    <el-scrollbar>
+      <el-form :model="videoForm" :rules="rules" ref="ruleForm" label-width="100px">
+        <el-form-item label="上传视频" prop="videoUrl">
+          <!-- action必选参数, 上传的地址 -->
+          <el-upload class="video-uploader"
+                     :action="videoUploadUrl"
+                     :show-file-list="false"
+                     :headers="headers"
+                     :limit="1"
+                     :on-success="handleVideoSuccess"
+                     :before-upload="beforeUploadVideo"
+                     :on-progress="uploadVideoProcess">
+            <video v-if="videoForm.videoUrl !== '' && videoFlag === false"
+                   :src="videoForm.videoUrl"
+                   class="video"
+                   controls
+            ></video>
+            <div v-else-if="videoForm.videoUrl === '' && videoFlag === false" class="el-icon-plus video-uploader-icon">
+              <Plus style="width: 1em; height: 1em;"/>
+            </div>
+            <el-progress v-if="videoFlag === true"
+                         type="circle"
+                         :percentage="videoUploadPercent"
+                         style="margin-top:30px;"></el-progress>
+            <img v-if="videoForm.videoUrl !== '' && videoFlag === false"
+                 :src="videoForm.coverImage"
                  class="video"
-                 controls
-          ></video>
-          <div v-else-if="videoForm.videoUrl === '' && videoFlag === false" class="el-icon-plus video-uploader-icon">
-            <Plus style="width: 1em; height: 1em;"/>
-          </div>
-          <el-progress v-if="videoFlag === true"
-                       type="circle"
-                       :percentage="videoUploadPercent"
-                       style="margin-top:30px;"></el-progress>
-          <img v-if="videoForm.videoUrl !== '' && videoFlag === false"
-               :src="videoForm.coverImage"
-               class="video"
-          />
-        </el-upload>
-      </el-form-item>
-      <el-form-item label="视频标题" prop="videoTitle">
-        <el-input v-model="videoForm.videoTitle"></el-input>
-      </el-form-item>
-      <el-form-item label="视频简介" prop="videoDesc">
-        <el-input type="textarea" v-model="videoForm.videoDesc"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">发布</el-button>
-      </el-form-item>
-    </el-form>
+            />
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="视频标题" prop="videoTitle">
+          <el-input v-model="videoForm.videoTitle"></el-input>
+        </el-form-item>
+        <el-form-item label="视频简介" prop="videoDesc">
+          <el-input type="textarea" v-model="videoForm.videoDesc"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('ruleForm')">发布</el-button>
+        </el-form-item>
+      </el-form>
+    </el-scrollbar>
   </div>
 </template>
 
