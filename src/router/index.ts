@@ -29,6 +29,7 @@ const router = createRouter({
                 },
                 {path: "publish", component: () => import("@/Layout/Publish.vue")},
                 {path: "videoSearch", component: () => import("@/Layout/VideoSearch.vue")},
+                {path: "follow", component: () => import("@/Layout/Follow.vue")},
             ],
         },
     ],
