@@ -15,20 +15,18 @@
             <li class="tab_left_item"
                 v-for="(item, i) in tabsLeftList"
                 :key="i">
-              <a href="#">
+              <router-link :to="item.link">
                 <div class="tab_left_item2">
                   <div class="round">
-                    <!--                    <component :is="item.class" style="width: 16px;height: 16px;"></component>-->
                     <i class="iconfont" :class="item.class" :style="item"></i>
                   </div>
                   <span>{{ item.name }}</span>
                 </div>
-              </a>
+              </router-link>
             </li>
           </ul>
         </div>
       </div>
-
     </el-scrollbar>
   </el-aside>
 </template>
@@ -49,20 +47,20 @@ export default {
           id: 1,
           name: "首页",
           background: "#ff5c7c",
-          class: "<el-icon><House /></el-icon>"
+          link: "/"
         },
         {
           id: 2,
           name: "动态",
           background: "#73c9e5",
-          class: "icon-iconfontdongtai",
+          link: "/",
         },
-        {id: 3, name: "热门", background: "#ff716d", class: "icon-remen"},
+        {id: 3, name: "关注", background: "#ff716d", link: "/follow"},
         {
           id: 4,
           name: "频道",
           background: "#6dc781",
-          class: "icon-icon_bilibili-circle",
+          link: "/",
         },
       ],
     }
