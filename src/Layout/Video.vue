@@ -1,26 +1,41 @@
 <template>
   <!--  视频播放-->
-  <VideoPlayer
+  <!--  <VideoPlayer-->
+  <!--      v-if="showVideoPlayer"-->
+  <!--      :autoPlay="autoPlay"-->
+  <!--      :video-url="videoUrl"-->
+  <!--      @reloadVideoFeed="reloadVideoFeedEmit"-->
+  <!--  ></VideoPlayer>-->
+  <!--  <VideoPlayerSwiper-->
+  <!--      v-if="showVideoPlayer"-->
+  <!--      :video-list="videoList"-->
+  <!--      @reloadVideoFeed="reloadVideoFeedEmit"-->
+  <!--  ></VideoPlayerSwiper> -->
+  <VideoPlayerCarousel
       v-if="showVideoPlayer"
-      :autoPlay="autoPlay"
-      :video-url="videoUrl"
+      :video-list="videoList"
       @reloadVideoFeed="reloadVideoFeedEmit"
-  ></VideoPlayer>
+  ></VideoPlayerCarousel>
+  <!--  <VideoPlayerScroll-->
+  <!--      v-if="showVideoPlayer"-->
+  <!--      :video-list="videoList"-->
+  <!--  ></VideoPlayerScroll>-->
 </template>
 
 <script>
-import VideoPlayer from "@/components/video/VideoPlayer.vue";
+import VideoPlayerCarousel from "@/components/video/VideoPlayerCarousel.vue";
 import {videoFeed} from "@/api/video"
 
 export default {
   name: 'Video',
-  components: {VideoPlayer},
+  components: {VideoPlayerCarousel},
   data() {
     return {
       autoPlay: true, // 自动播放视频
       showVideoPlayer: true,
       publishTime: undefined,
       videoUrl: undefined,
+      videoList: [],
     }
   },
   created() {
@@ -32,9 +47,9 @@ export default {
     getVideoFeed() {
       videoFeed(this.publishTime).then(res => {
         if (res.code === 200 && res.data != null) {
-          // console.log(res.data.videoUrl)
-          this.videoUrl = res.data.videoUrl
-          this.publishTime = res.data.createTime
+          // console.log(res.data)
+          this.videoList = res.data
+          this.publishTime = res.data[4].createTime
         } else {
           this.$message.error(res.msg)
         }

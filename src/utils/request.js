@@ -8,7 +8,7 @@ axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 const instance = axios.create({
     baseURL: 'http://localhost:9090',
     // baseURL: 'http://39.101.67.45:9090',
-    timeout: 5000,
+    timeout: 20000,
 });
 const userstore = useUserStore()
 const token = userstore.token

@@ -26,6 +26,45 @@
 .el-input__inner {
     height: 38px;
 }
+
 .keyword-hint {
     color: red;
+}
+
+.video-player {
+    .el-carousel__container {
+        height: 100%;
+    }
+}
+
+/*el抽屉drawer*/
+.el-drawer {
+    background-color: rgba(0, 0, 0, 0.80);
+    backdrop-filter: blur(20px);
+}
+
+.el-drawer__header {
+    margin-bottom: 0 !important;
+}
+
+.el-drawer__body {
+    padding: 0 !important;
+    margin: 1rem;
+}
+
+/*el卡片card*/
+.el-card {
+    background-color: transparent;
+    border: none;
+}
+
+.el-card__body {
+    padding: 0.2rem;
+}
+
+.el-pagination button{
+    background-color: transparent;
+}
+.el-pagination{
+    margin: 0 0 2rem 0;
 }

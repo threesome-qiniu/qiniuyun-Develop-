@@ -21,6 +21,14 @@ export function videoMypage(data) {
     })
 }
 
+// 分页查询用户视频
+export function videoUserpage(data) {
+    return request({
+        url: '/video/api/v1/userpage',
+        method: 'post',
+        data: data
+    })
+}
 
 // 发布视频
 export function publishVideo(data) {
