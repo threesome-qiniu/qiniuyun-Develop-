@@ -13,8 +13,8 @@ import piniaPluginPersistedstate from "pinia-plugin-persistedstate"; //pinia 自
 
 import { parseTime, resetForm, addDateRange, handleTree } from "@/utils/roydon";
 
-import VueVideoPlayer from 'vue-video-player'
-import 'video.js/dist/video-js.css'
+import VueVideoPlayer from "vue-video-player";
+// import "video.js/dist/video-js.css";
 // import 'vue-video-player/src/custom-theme.css'
 
 const app = createApp(App);

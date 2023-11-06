@@ -1,8 +1,8 @@
 import axios from 'axios'
 import ElementPlus, {ElMessage, ElMessageBox} from 'element-plus'
 import errorCode from '@/utils/errorCode'
-import {useUserStore} from "@/store/useUserStore";
-import {MessageBox} from "@element-plus/icons-vue";
+import { Message, MessageBox } from "@element-plus/icons-vue";
+import { useUserStore } from "@/store/useUserStore";
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 const instance = axios.create({
@@ -36,7 +36,6 @@ instance.interceptors.request.use(config => {
 // 添加响应拦截器
 instance.interceptors.response.use(res => {
     // 未设置状态码则默认成功状态
-    // console.log(res.data.msg)
     const code = res.data.code || 200;
     // 获取错误信息
     const msg = errorCode[code] || res.data.msg || errorCode['default']
