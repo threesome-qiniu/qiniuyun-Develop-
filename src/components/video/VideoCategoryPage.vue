@@ -15,8 +15,8 @@
               :src="item.coverImage"/>
         </div>
         <div style="height:20%;margin-top:10px;display: flex;justify-content: space-between;align-items: center">
-          <div style="font-size: 0.8rem;color: black">{{ item.videoTitle }}
-            <p style="font-size: 0.7rem;color: gray;">{{ item.videoDesc }}</p>
+          <div class="one-line" style="font-size: 0.8rem;color: black">{{ item.videoTitle }}
+            <p class="one-line" style="font-size: 0.7rem;color: gray;">{{ item.videoDesc }}</p>
           </div>
           <el-avatar :src="item.userAvatar"/>
         </div>
@@ -38,7 +38,7 @@
              width="80%"
              :show-close="false">
     <template #header="{ close, titleId, titleClass }">
-      <h2 :id="titleId" :class="titleClass" style="color: black">{{ video.videoTitle }}</h2>
+      <h2 class="one-line" :id="titleId" :class="titleClass" style="color: black">{{ video.videoTitle }}</h2>
       <el-button circle :icon="Close" type="info" @click="close">
       </el-button>
     </template>

@@ -11,7 +11,7 @@ const router = createRouter({
             name: "Index",
             component: () => import("@/Layout/Index.vue"),
             children: [
-                {path: "", component: () => import("@/Layout/Video.vue")},
+                {path: "index", component: () => import("@/Layout/Video.vue")},
                 {path: "user", component: () => import("@/Layout/User.vue")},
                 {
                     path: "useredit",

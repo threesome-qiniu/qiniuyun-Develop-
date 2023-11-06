@@ -9,6 +9,14 @@ a {
     text-decoration: none
 }
 
+.one-line {
+    /* 一行显示 */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+
 .flex-center {
     display: flex;
     justify-content: center;
@@ -123,4 +131,11 @@ a {
 
 .custom-loading-svg {
     justify-content: center;
+}
+
+.router-is-focus .tab_left_item2 {
+    backdrop-filter: blur(10px);
+    background-color: rgba(150, 150, 150, 0.5);
+    color: black !important;
+    font-weight: 600;
 }
