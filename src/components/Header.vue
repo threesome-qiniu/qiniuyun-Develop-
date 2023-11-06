@@ -151,6 +151,7 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
+  background-color: ghostwhite;
   justify-content: space-between;
   backdrop-filter: blur(20px);
 
@@ -173,7 +174,8 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 0 10vw;
+  border-radius: 1.1rem;
+  border: 2px solid black;
 }
 
 .search-input {

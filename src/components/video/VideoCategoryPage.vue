@@ -7,13 +7,15 @@
          style="display: flex;flex-flow: row wrap;justify-content: space-between">
       <el-card v-for="item in videoList"
                :key="item.videoId"
-               style="background-color: white;width: 32.66%;border-radius:0.5rem;height: 200px;margin-bottom: 0.5rem">
-        <el-image
-            style="height: 80%;border-radius: 0.5rem"
-            @click="videoDialog(item.videoId)"
-            :src="item.coverImage"/>
-        <div style="height:20%;display: flex;justify-content: space-between;align-items: center">
-          <div style="font-size: 0.8rem;color: white">{{ item.videoTitle }}
+               style="padding:1rem;background-color: white;width: 32.66%;border-radius:0.5rem;height: 200px;margin-bottom: 0.5rem">
+        <div style="height: 80%;border-radius: 0.5rem;text-align: center">
+          <el-image
+              style="height:100%;border-radius: 0.5rem"
+              @click="videoDialog(item.videoId)"
+              :src="item.coverImage"/>
+        </div>
+        <div style="height:20%;margin-top:10px;display: flex;justify-content: space-between;align-items: center">
+          <div style="font-size: 0.8rem;color: black">{{ item.videoTitle }}
             <p style="font-size: 0.7rem;color: gray;">{{ item.videoDesc }}</p>
           </div>
           <el-avatar :src="item.userAvatar"/>
@@ -122,7 +124,7 @@ export default {
 <style scoped>
 .video-page-container {
   border-radius: 1rem;
-  height: calc(100vh - 160px);
+  height: 100%;
   backdrop-filter: blur(20px);
 }
 </style>

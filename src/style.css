@@ -5,22 +5,28 @@
     font-family: "PingFang SC", "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
 
+a {
+    text-decoration: none
+}
+
 .flex-center {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/*.el-main {*/
-/*    backdrop-filter: blur(10px);*/
-/*}*/
+.el-main {
+    padding: 1rem !important;
+}
 
 .el-upload {
     width: 100%;
 }
 
-.el-input__wrapper {
-    border-radius: 1rem 0 0 1rem;
+.niuyin-header {
+    .el-input__wrapper {
+        border-radius: 1rem 0 0 1rem;
+    }
 }
 
 .el-input__inner {
@@ -59,7 +65,6 @@
 }
 
 .el-card__body {
-    padding: 0.2rem;
 }
 
 .el-pagination button {
@@ -72,7 +77,6 @@
 }
 
 .el-tabs {
-    color: white !important;
     background-color: transparent !important;
     border: none !important;
 }
@@ -82,12 +86,6 @@
 }
 
 .el-tabs__item {
-    color: white !important;
-    background-color: transparent !important;
-}
-
-.el-tabs__item {
-    color: white !important;
     background-color: transparent !important;
 }
 
@@ -98,7 +96,6 @@
 .el-card__body {
     height: 100%;
     padding: 0.5rem;
-    text-align: center;
 }
 
 .el-loading-mask {
@@ -122,4 +119,8 @@
 
 .el-dialog__body {
     height: 90%;
+}
+
+.custom-loading-svg {
+    justify-content: center;
 }

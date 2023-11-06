@@ -1,5 +1,8 @@
 <template>
-  <div class="search-container">
+  <div class="search-container custom-loading-svg"
+       :element-loading-svg="svg"
+       element-loading-svg-view-box="-10, -10, 50, 50"
+       v-loading="loading">
     <el-scrollbar>
       <div class="hint-container" v-for="item in videoSearchList" key="item.viderId">
         <div class="user-container">
@@ -21,6 +24,17 @@ export default {
   props: {},
   data() {
     return {
+      loading: true,
+      svg: `
+        <path class="path" d="
+          M 30 15
+          L 28 17
+          M 25.61 25.61
+          A 15 15, 0, 0, 1, 15 30
+          A 15 15, 0, 1, 1, 27.99 7.5
+          L 15 15
+        " style="stroke-width: 4px; fill: rgba(0, 0, 0, 0)"/>
+      `,
       searchFrom: {
         keyword: this.$route.query.keyword,// 搜索输入框的数据  url 上的keyword
         pageNum: 0,
@@ -36,9 +50,12 @@ export default {
   },
   methods: {
     loadSearchVideo() {
+      this.loading = true
       searchVideo(this.searchFrom).then(res => {
-        // console.log(res)
-        this.videoSearchList = res.data
+        if (res.code === 200) {
+          this.videoSearchList = res.data
+          this.loading = false
+        }
       })
 
     }
@@ -50,20 +67,17 @@ export default {
   border-radius: 1rem;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(10px);
 }
 
 .hint-container {
-  margin: 2rem;
   border-radius: 1rem;
   background: white;
-  max-height: calc(100vh - 120px - 8rem);
+  height: 100%;
   padding: 2rem;
-  color: white;
+  color: black;
 }
 
 .user-container {
-  text-align: center;
   display: flex;
   border-radius: 10px;
 

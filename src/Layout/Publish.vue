@@ -148,9 +148,9 @@ export default {
 <style scoped lang="less">
 .publish-container {
   border-radius: 1rem;
-  height: calc(100vh - 160px);
-  backdrop-filter: blur(20px);
-  padding: 2rem;
+  height: 100%;
+  background-color: aliceblue;
+  padding: 1rem;
 }
 
 .video-uploader {
@@ -160,9 +160,9 @@ export default {
     border: 2px dashed darkblue !important;
     border-radius: 0.5rem;
     font-size: 28px;
-    color: #8c939d;
+    color: black;
     width: 100%;
-    height: calc(100vw / 7);
+    height: 100%;
     line-height: 180px;
     text-align: center;
   }
@@ -170,8 +170,7 @@ export default {
 }
 
 .video-uploader .el-upload:hover {
-  border: 2px dashed #d9d9d9 !important;
-  border-color: #409eff;
+  border: 2px dashed #d83f3f !important;
 }
 
 .video {

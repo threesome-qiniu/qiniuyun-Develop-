@@ -1,10 +1,14 @@
 <template>
   <!--  侧边栏-->
-  <el-aside width="200px">
+  <el-aside width="160px">
     <el-scrollbar>
-      <div style="width:100%;overflow:hidden;">
-        <router-link class="link-type" :to="'/'">
-          <img style="width: auto;height: 60px;margin: 0 auto;display: block" src="@/assets/logo/logo.png">
+      <div style="width:100%;overflow:hidden;height: 60px;text-align: center">
+        <router-link style="display:flex;justify-content: center;align-items: center;width: 100%;height: 100%;text-decoration: none"
+                     class="link-type"
+                     :to="'/'">
+          <img style="width: 32px;height: 32px;display: inline-block"
+               src="@/assets/logo/logo-tiktok.png">
+          <span style="display:inline-block;line-height: 60px;height: 60px">牛音</span>
         </router-link>
       </div>
       <!-- tab栏区域 -->
@@ -43,25 +47,10 @@ export default {
   data() {
     return {
       tabsLeftList: [
-        {
-          id: 1,
-          name: "首页",
-          background: "#ff5c7c",
-          link: "/"
-        },
-        {
-          id: 2,
-          name: "动态",
-          background: "#73c9e5",
-          link: "/",
-        },
+        {id: 1, name: "首页", background: "#ff5c7c", link: "/"},
+        {id: 2, name: "动态", background: "#73c9e5", link: "/",},
         {id: 3, name: "关注", background: "#ff716d", link: "/follow"},
-        {
-          id: 4,
-          name: "频道",
-          background: "#6dc781",
-          link: "/channel",
-        },
+        {id: 4, name: "频道", background: "#6dc781", link: "/channel",},
       ],
     }
   },
@@ -75,16 +64,7 @@ export default {
 
 <style>
 .el-aside {
-  backdrop-filter: blur(10px);
-}
-
-.tab_main {
-//display: flex; //justify-content: center; //align-items: center;
-}
-
-/* tab栏左边区域 */
-.tab_left {
-//width: 100%;
+  background-color: aliceblue
 }
 
 .tab_left_item {
@@ -99,7 +79,7 @@ export default {
   border-radius: 0.5rem;
   padding: 0.5rem 0;
   text-decoration: none;
-  color: white;
+  color: black;
 }
 
 .tab_left_item2 {
@@ -114,8 +94,8 @@ export default {
 }
 
 .tab_left_item2:hover {
-  backdrop-filter: blur(0);
-  background-color: #5b5858;
+  backdrop-filter: blur(10px);
+  background-color: rgba(150, 150, 150, 0.5);
   color: blue !important;
 }
 

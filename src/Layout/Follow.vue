@@ -1,6 +1,6 @@
 <template>
   <div class="follow-container" style="display: flex;">
-    <el-scrollbar style="width: 20%;">
+    <el-scrollbar style="width: 15%;">
       <el-card class="user-card"
                v-for="item in followList"
                :key="item.userId"
@@ -15,7 +15,7 @@
         </div>
       </el-card>
     </el-scrollbar>
-    <div class="video-container" style="width: 80%">
+    <div class="video-container" style="width: 85%">
       <video-player-carousel
           v-if="showVideoPlayer"
           :video-list="videoList"
@@ -85,9 +85,9 @@ export default {
 <style scoped>
 .follow-container {
   width: 100%;
-  border-radius: 1rem;
   height: 100%;
-  backdrop-filter: blur(20px);
+  border-radius: 1rem;
+  background-color: aliceblue
 }
 
 .user-card {
@@ -103,7 +103,7 @@ export default {
       padding-left: 10px;
 
       .nickname {
-        color: white;
+        color: black;
         font-size: 0.8rem;
       }
 
@@ -112,7 +112,7 @@ export default {
 }
 
 .user-card:hover {
-  background-color: #5b5858;;
+  background-color: rgba(134, 128, 128, 0.55);
   backdrop-filter: blur(10px);
 }
 </style>

@@ -12,6 +12,10 @@
   <!--      @reloadVideoFeed="reloadVideoFeedEmit"-->
   <!--  ></VideoPlayerSwiper> -->
   <VideoPlayerCarousel
+      v-loading="loading"
+      :element-loading-svg="svg"
+      class="custom-loading-svg"
+      element-loading-svg-view-box="-10, -10, 50, 50"
       v-if="showVideoPlayer"
       :video-list="videoList"
       @reloadVideoFeed="reloadVideoFeedEmit"
@@ -31,6 +35,17 @@ export default {
   components: {VideoPlayerCarousel},
   data() {
     return {
+      loading: true,
+      svg: `
+        <path class="path" d="
+          M 30 15
+          L 28 17
+          M 25.61 25.61
+          A 15 15, 0, 0, 1, 15 30
+          A 15 15, 0, 1, 1, 27.99 7.5
+          L 15 15
+        " style="stroke-width: 4px; fill: rgba(10, 10, 10, 0)"/>
+      `,
       autoPlay: true, // 自动播放视频
       showVideoPlayer: true,
       publishTime: undefined,
@@ -45,11 +60,13 @@ export default {
   },
   methods: {
     getVideoFeed() {
+      this.loading = true
       videoFeed(this.publishTime).then(res => {
         if (res.code === 200 && res.data != null) {
           // console.log(res.data)
           this.videoList = res.data
-          this.publishTime = res.data[this.videoList.length-1].createTime
+          this.loading = false
+          this.publishTime = res.data[this.videoList.length - 1].createTime
         } else {
           this.$message.error(res.msg)
         }

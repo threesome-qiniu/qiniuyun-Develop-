@@ -115,8 +115,7 @@
 </template>
 <script>
 import {
-  Apple,
-  ArrowLeftBold, ChatDotRound, ChromeFilled, CircleCloseFilled, Close, Search, Star
+  Apple, ChatDotRound, ChromeFilled, Close, Star
 } from '@element-plus/icons-vue'
 import {videoCommentPageList, addVideoComment, likeVideo} from '@/api/behave.js'
 
@@ -135,17 +134,8 @@ export default {
     ChromeFilled() {
       return ChromeFilled
     },
-    Search() {
-      return Search
-    },
     Close() {
       return Close
-    },
-    CircleCloseFilled() {
-      return CircleCloseFilled
-    },
-    ArrowLeftBold() {
-      return ArrowLeftBold
     }
   },
   props: {
@@ -245,7 +235,7 @@ export default {
         setTimeout(() => {
           videos[i].pause();
           // videos[i].load();
-        }, 100);
+        }, 10);
       }
       if (oldVal - newVal === videos.length - 1) {
         console.log("一个轮回")

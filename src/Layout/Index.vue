@@ -9,7 +9,7 @@
           <!--          路由-->
           <router-view/>
         </el-main>
-        <el-footer style="backdrop-filter: blur(10px)">Footer</el-footer>
+<!--        <el-footer style="background-color: ghostwhite;">Footer</el-footer>-->
       </el-container>
     </el-container>
   </div>
@@ -52,8 +52,8 @@ export default {
 <style lang='scss'>
 //@import "~@/assets/styles/index.scss";
 .niuyin {
-  background-image: url("../assets/images/bg.png");
-  //background-color: #464545;;
+  //background-image: url("../assets/images/bg.png");
+  background-color: aliceblue
 }
 
 .el-footer {
