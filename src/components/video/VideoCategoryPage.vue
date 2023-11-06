@@ -7,7 +7,7 @@
          style="display: flex;flex-flow: row wrap;justify-content: space-between">
       <el-card v-for="item in videoList"
                :key="item.videoId"
-               style="padding:1rem;background-color: white;width: 32.66%;border-radius:0.5rem;height: 200px;margin-bottom: 0.5rem">
+               style="padding:1rem;background-color: white;width: 32.66%;border-radius:0.5rem;height: 300px;margin-bottom: 0.5rem">
         <div style="height: 80%;border-radius: 0.5rem;text-align: center">
           <el-image
               style="height:100%;border-radius: 0.5rem"
@@ -18,7 +18,8 @@
           <div class="one-line" style="font-size: 0.8rem;color: black">{{ item.videoTitle }}
             <p class="one-line" style="font-size: 0.7rem;color: gray;">{{ item.videoDesc }}</p>
           </div>
-          <el-avatar :src="item.userAvatar"/>
+          <el-avatar v-if="item.userAvatar" :src="item.userAvatar"/>
+          <el-avatar v-else :icon="UserFilled"/>
         </div>
       </el-card>
       <el-empty v-show="videoTotal<=0" description="暂无数据"/>
@@ -38,7 +39,7 @@
              width="80%"
              :show-close="false">
     <template #header="{ close, titleId, titleClass }">
-      <h2 class="one-line" :id="titleId" :class="titleClass" style="color: black">{{ video.videoTitle }}</h2>
+      <h3 class="one-line" :id="titleId" :class="titleClass" style="color: black">{{ video.videoTitle }}</h3>
       <el-button circle :icon="Close" type="info" @click="close">
       </el-button>
     </template>
@@ -52,11 +53,14 @@
 
 <script>
 import {videoCategoryPage} from "@/api/video.js";
-import {Close} from "@element-plus/icons-vue";
+import {Close, UserFilled} from "@element-plus/icons-vue";
 
 export default {
   name: 'VideoCategoryPage',
   computed: {
+    UserFilled() {
+      return UserFilled
+    },
     Close() {
       return Close
     }

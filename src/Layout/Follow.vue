@@ -7,8 +7,10 @@
                shadow="hover">
         <div class="user-info" @click="getFollowedVideoList(item.userId)">
           <el-avatar class="user-avatar"
+                     v-if="item.avatar"
                      :src="item.avatar"
                      lazy/>
+          <el-avatar v-else :icon="UserFilled"/>
           <div class="user-nickname">
             <p class="nickname">{{ item.nickName }}</p>
           </div>
@@ -29,9 +31,15 @@
 import {followPageList} from '@/api/social.js'
 import VideoPlayerCarousel from "@/components/video/VideoPlayerCarousel.vue";
 import {videoUserpage} from "@/api/video"
+import {UserFilled} from "@element-plus/icons-vue";
 
 export default {
   name: "Follow",
+  computed: {
+    UserFilled() {
+      return UserFilled
+    }
+  },
   components: {VideoPlayerCarousel},
   data() {
     return {

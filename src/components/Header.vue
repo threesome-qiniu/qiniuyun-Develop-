@@ -40,7 +40,9 @@
       </div>
       <el-dropdown>
         <router-link class="user-container" :to="'/user'">
-          <el-avatar :src="user.avatar"/>
+          <el-avatar v-if="user.avatar" :src="user.avatar"/>
+          <el-avatar v-else :icon="UserFilled"/>
+
           <span style="padding-left: 10px">{{ user.nickName }}</span>
         </router-link>
         <template #dropdown>
@@ -65,13 +67,18 @@ import {
   Edit,
   Message,
   Search,
-  Star,
+  Star, UserFilled,
 } from '@element-plus/icons-vue'
 import {useUserStore} from "@/store/useUserStore";
 import {getInfo} from "@/api/user.js";
 
 export default {
   name: "Header",
+  computed: {
+    UserFilled() {
+      return UserFilled
+    }
+  },
   components: {Message},
   props: {
     // user: Object,
@@ -95,7 +102,7 @@ export default {
       // 输入框的数据
       searchData: "",
       // 默认搜索词
-      searchDefaults: "请输入内容",
+      searchDefaults: "输入你感兴趣的内容",
     }
   },
   created() {

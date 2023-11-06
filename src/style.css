@@ -9,6 +9,10 @@ a {
     text-decoration: none
 }
 
+.backdrop-filter {
+    backdrop-filter: contrast(0.6) brightness(2.5) saturate(1.5) blur(20px);
+}
+
 .one-line {
     /* 一行显示 */
     display: -webkit-box;
