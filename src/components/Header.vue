@@ -32,6 +32,7 @@
         </el-autocomplete>
         <el-button class="search-btn" type="info" plain @click="searchConfirm">
           <i class="iconfont icon-sousuo search_logo"></i>
+          搜索
         </el-button>
       </div>
     </div>
@@ -161,7 +162,7 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
-  background-color: ghostwhite;
+  background-color: aliceblue;
   justify-content: space-between;
   backdrop-filter: blur(20px);
 
@@ -206,7 +207,9 @@ export default {
 }
 
 .search-btn {
-  width: 48px;
+  width: 90px;
+  font-weight: 600;
+  color: black;
   height: 40px;
   border-radius: 0 1rem 1rem 0;
   margin: 0;
@@ -214,9 +217,10 @@ export default {
 }
 
 .search_logo {
-  font-size: 24px;
+  font-size: 20px;
+  margin-right: 5px;
   font-weight: 600;
-  color: #2999d9;
+  color: darkblue;
 }
 
 .user-container {

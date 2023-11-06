@@ -30,6 +30,9 @@
             </router-link>
           </li>
         </ul>
+        <el-divider>
+          <el-icon><star-filled /></el-icon>
+        </el-divider>
       </div>
     </el-scrollbar>
   </el-aside>
@@ -71,7 +74,7 @@ export default {
   width: 100%;
   margin: 10px 0;
   text-align: center;
-  font-size: 16px;
+  font-size: 0.9rem;
   border-radius: 0.5rem;
 }
 

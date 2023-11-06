@@ -11,15 +11,26 @@
   <!--      :video-list="videoList"-->
   <!--      @reloadVideoFeed="reloadVideoFeedEmit"-->
   <!--  ></VideoPlayerSwiper> -->
-  <VideoPlayerCarousel
-      v-loading="loading"
-      :element-loading-svg="svg"
-      class="custom-loading-svg"
-      element-loading-svg-view-box="-10, -10, 50, 50"
-      v-if="showVideoPlayer"
-      :video-list="videoList"
-      @reloadVideoFeed="reloadVideoFeedEmit"
-  ></VideoPlayerCarousel>
+  <!--  <el-space style="width: 100%;height: 100%" direction="vertical" alignment="flex-start">-->
+  <!--    <el-skeleton style="width: 100%" :loading="loading" animated>-->
+  <!--      <template #template>-->
+  <!--        <el-skeleton-item variant="image" style="width: 240px; height: 240px"/>-->
+  <!--      </template>-->
+  <!--      <template #default>-->
+  <div style="height: 100%;width: 100%;">
+    <VideoPlayerCarousel
+        v-loading="loading"
+        :element-loading-svg="svg"
+        class="custom-loading-svg"
+        element-loading-svg-view-box="-10, -10, 50, 50"
+        v-if="showVideoPlayer"
+        :video-list="videoList"
+        @reloadVideoFeed="reloadVideoFeedEmit"
+    ></VideoPlayerCarousel>
+  </div>
+  <!--      </template>-->
+  <!--    </el-skeleton>-->
+  <!--  </el-space>-->
   <!--  <VideoPlayerScroll-->
   <!--      v-if="showVideoPlayer"-->
   <!--      :video-list="videoList"-->

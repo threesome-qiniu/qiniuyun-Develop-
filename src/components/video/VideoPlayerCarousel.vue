@@ -46,7 +46,10 @@
           </div>
         </div>
       </div>
-      <el-drawer class="video-sidebar" v-model="drawer" :show-close="false" @mousewheel.stop
+      <el-drawer class="video-sidebar"
+                 v-model="drawer"
+                 :show-close="false"
+                 @mousewheel.stop
                  :before-close="videoCommentTree=null">
         <template #header="{ close, titleId, titleClass }">
           <h2 :id="titleId" :class="titleClass">评论<span>({{ item.commentNum }})</span></h2>
@@ -100,8 +103,10 @@
         </el-scrollbar>
         <div class="comment-input-area">
           <el-input
+              slot="reference"
               v-model="commentInput"
               clearable
+              @input="change($event)"
               placeholder="留下你的精彩评论吧"
           >
             <template #append>
@@ -162,6 +167,9 @@ export default {
   mounted() {
   },
   methods: {
+    change(e) {
+      this.$forceUpdate()
+    },
     videoLikeClick(videoId) {
       likeVideo(videoId).then(res => {
         if (res.code === 200) {
@@ -214,7 +222,7 @@ export default {
             _that.timeOut = null;
             console.log("keyDown")
             _that.$refs.carousel.next()
-          }, 500);
+          }, 1000);
         }
       }
       // 方向键--左
@@ -256,7 +264,7 @@ export default {
           scrollVal > 0
               ? _that.$refs.carousel.prev()
               : _that.$refs.carousel.next();
-        }, 500);
+        }, 1000);
       } else {
       }
     },
