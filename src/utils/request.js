@@ -1,13 +1,13 @@
 import axios from 'axios'
-import ElementPlus from 'element-plus'
+import ElementPlus, {ElMessage, ElMessageBox} from 'element-plus'
 import errorCode from '@/utils/errorCode'
-import {Message, MessageBox} from "@element-plus/icons-vue";
 import {useUserStore} from "@/store/useUserStore";
+import {MessageBox} from "@element-plus/icons-vue";
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 const instance = axios.create({
-    baseURL: 'http://localhost:9090',
-    // baseURL: 'http://39.101.67.45:9090',
+    // baseURL: 'http://localhost:9090',
+    baseURL: 'http://39.101.67.45:9090',
     timeout: 20000,
 });
 const userstore = useUserStore()
@@ -46,9 +46,9 @@ instance.interceptors.response.use(res => {
     }
     if (res.data.msg === "用户未认证") {
         console.log(res.data.msg)
-        location.href = '/login';
+        // location.href = '/login';
         // 展示重新登陆逻辑
-        MessageBox.confirm('登录状态已过期，是否选择重新登录', '系统提示', {
+        ElMessageBox.confirm('登录状态已过期，是否选择重新登录', '系统提示', {
             confirmButtonText: '重新登录',
             cancelButtonText: '取消',
             type: 'warning'
@@ -60,7 +60,7 @@ instance.interceptors.response.use(res => {
     // 未认证
     if (code === 401) {
         // 展示重新登陆逻辑
-        MessageBox.confirm('登录状态已过期，是否选择重新登录', '系统提示', {
+        ElMessageBox.confirm('登录状态已过期，是否选择重新登录', '系统提示', {
             confirmButtonText: '重新登录',
             cancelButtonText: '取消',
             type: 'warning'
@@ -69,15 +69,10 @@ instance.interceptors.response.use(res => {
         });
         return Promise.reject('请重新登录。')
     } else if (code === 500) {
-        Message({
-            message: msg,
-            type: 'error'
-        })
+        ElMessage.error(msg)
         return Promise.reject(new Error(msg))
     } else if (code !== 200) {
-        Notification.error({
-            title: msg
-        })
+        ElMessage.error(msg)
         return Promise.reject('error')
     } else {
         return res.data
