@@ -73,10 +73,11 @@ export default {
       rules: {
         videoTitle: [
           {required: true, message: '请输入视频标题', trigger: 'blur'},
-          {min: 1, max: 30, message: '长度在 1 到 30 个字符', trigger: 'blur'}
+          {min: 1, max: 100, message: '长度在 1 到 100 个字符', trigger: 'blur'}
         ],
         videoDesc: [
-          {required: true, message: '请填写视频简介', trigger: 'blur'}
+          {required: true, message: '请填写视频简介', trigger: 'blur'},
+          {min: 1, max: 200, message: '长度在 1 到 200 个字符', trigger: 'blur'}
         ]
       }
     };

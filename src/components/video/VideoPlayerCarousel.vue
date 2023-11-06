@@ -90,6 +90,7 @@
               </el-card>
             </div>
           </div>
+          <el-empty v-show="commentTotal<=0" description="暂无评论"/>
           <el-pagination v-show="commentTotal>0"
                          :total="commentTotal"
                          background
@@ -349,7 +350,6 @@ export default {
       }
     }
 
-
   }
 
 }
@@ -408,6 +408,7 @@ export default {
 }
 
 .comment-input-area {
+  width: 100%;
   position: absolute;
   bottom: 0;
   left: 0;

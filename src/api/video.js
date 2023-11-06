@@ -38,3 +38,21 @@ export function publishVideo(data) {
         data: data
     })
 }
+
+// 视频分类列表
+export function videoCategory() {
+    return request({
+        url: '/video/api/v1/category',
+        method: 'get'
+    })
+}
+
+// 视频分类分页video
+export function videoCategoryPage(data) {
+    return request({
+        url: '/video/api/v1/category/page',
+        method: 'post',
+        data: data
+    })
+}
+

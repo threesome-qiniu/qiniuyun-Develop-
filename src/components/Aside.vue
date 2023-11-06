@@ -15,7 +15,7 @@
             <li class="tab_left_item"
                 v-for="(item, i) in tabsLeftList"
                 :key="i">
-              <router-link :to="item.link">
+              <router-link class="router-link" :to="item.link">
                 <div class="tab_left_item2">
                   <div class="round">
                     <i class="iconfont" :class="item.class" :style="item"></i>
@@ -60,7 +60,7 @@ export default {
           id: 4,
           name: "频道",
           background: "#6dc781",
-          link: "/",
+          link: "/channel",
         },
       ],
     }
@@ -92,20 +92,31 @@ export default {
   margin: 10px 0;
   text-align: center;
   font-size: 16px;
+  border-radius: 0.5rem;
+}
+
+.router-link {
+  border-radius: 0.5rem;
+  padding: 0.5rem 0;
+  text-decoration: none;
+  color: white;
 }
 
 .tab_left_item2 {
   margin: 5px;
   display: flex;
+  padding: 0.5rem 0;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-
-
+  border-radius: 0.5rem;
+  transition: all 0.5s ease;
 }
 
 .tab_left_item2:hover {
   backdrop-filter: blur(0);
+  background-color: #5b5858;
+  color: blue !important;
 }
 
 .round {
