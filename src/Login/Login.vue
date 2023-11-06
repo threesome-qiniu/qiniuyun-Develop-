@@ -103,7 +103,7 @@ export default {
     },
     // 注册
     async goregister() {
-      // this.login = true
+      this.login = true
       const res = await request.post('/user/api/v1/register', {
         username: this.registerform.name,
         password: this.registerform.password,
