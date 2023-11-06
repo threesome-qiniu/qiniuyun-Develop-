@@ -13,7 +13,6 @@
         <el-autocomplete
             class="search-input"
             slot="reference"
-            popper-class="my-autocomplete"
             v-model="searchData"
             :placeholder="searchDefaults"
             :fetch-suggestions="querySearch"
@@ -21,13 +20,16 @@
             @keyup.enter.native="searchConfirm"
             clearable
         >
-          <!--          <template slot-scope="{ item }">-->
-          <!--            <div class="search-history">-->
-          <!--              <el-tag type="info">{{ item.keyword }}</el-tag>-->
-          <!--            </div>-->
-          <!--          </template>-->
-        </el-autocomplete>
+          <template #default="{row,$index}">
+            <el-tag
+                class="mx-1"
+                effect="plain"
+            >
+              {{ $index}}
+            </el-tag>
+          </template>
 
+        </el-autocomplete>
         <el-button class="search-btn" type="info" plain @click="searchConfirm">
           <i class="iconfont icon-sousuo search_logo"></i>
         </el-button>
@@ -106,21 +108,22 @@ export default {
     }
   },
   created() {
-    // this.getUserInfo()
+    this.getUserInfo()
   },
   methods: {
-    // getUserInfo() {
-    //   localStorage.getItem("userInfo")
-    //   getInfo().then(res => {
-    //     if (res.code === 200) {
-    //       localStorage.setItem("userInfo", JSON.stringify(res.data))
-    //     }
-    //   })
-    // },
+    getUserInfo() {
+      if (localStorage.getItem("userInfo") == null) {
+        getInfo().then(res => {
+          if (res.code === 200) {
+            this.user = res.data
+            localStorage.setItem("userInfo", JSON.stringify(res.data))
+          }
+        })
+      }
+    },
     // 输入框获取焦点时调用的方法
     querySearch(queryString, cb) {
-      let results = this.searchHistory;
-      console.log(results)
+      const results = this.searchHistory
       cb(results);
     },
     // 判断选中了哪个搜索历史
@@ -178,11 +181,13 @@ export default {
 }
 
 .nav_center_search {
+  width: 30vw;
   display: flex;
   justify-content: space-around;
   align-items: center;
   border-radius: 1.1rem;
   border: 2px solid black;
+
 }
 
 .search-input {

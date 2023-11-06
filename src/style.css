@@ -143,3 +143,7 @@ a {
     color: black !important;
     font-weight: 600;
 }
+
+.el-autocomplete {
+    width: 100%;
+}
