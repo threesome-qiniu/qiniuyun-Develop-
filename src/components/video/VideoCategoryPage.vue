@@ -1,36 +1,64 @@
 <template>
   <div class="video-page-container">
-<!--    <el-scrollbar class="video-container">-->
-      <div style="display: flex;flex-flow: row wrap;justify-content: space-between">
-        <el-card v-for="item in videoList"
-                 :key="item.videoId"
-                 style="width: 32.66%;border-radius:0.5rem;height: 200px;margin-bottom: 0.5rem">
-          <el-image style="height: 80%;border-radius: 0.5rem" :src="item.coverImage"/>
-          <div style="height:20%;display: flex;justify-content: space-between;align-items: center">
-            <div style="font-size: 0.8rem;color: white">{{ item.videoTitle }}
-              <p style="font-size: 0.7rem;color: gray;">{{ item.videoDesc }}</p>
-            </div>
-            <el-avatar :src="item.userAvatar"/>
+    <div v-loading="loading"
+         :element-loading-svg="svg"
+         class="custom-loading-svg"
+         element-loading-svg-view-box="-10, -10, 50, 50"
+         style="display: flex;flex-flow: row wrap;justify-content: space-between">
+      <el-card v-for="item in videoList"
+               :key="item.videoId"
+               style="background-color: white;width: 32.66%;border-radius:0.5rem;height: 200px;margin-bottom: 0.5rem">
+        <el-image
+            style="height: 80%;border-radius: 0.5rem"
+            @click="videoDialog(item.videoId)"
+            :src="item.coverImage"/>
+        <div style="height:20%;display: flex;justify-content: space-between;align-items: center">
+          <div style="font-size: 0.8rem;color: white">{{ item.videoTitle }}
+            <p style="font-size: 0.7rem;color: gray;">{{ item.videoDesc }}</p>
           </div>
-        </el-card>
-        <el-empty v-show="videoTotal<=0" description="暂无数据"/>
-      </div>
-      <el-pagination v-show="videoTotal>0"
-                     :total="videoTotal"
-                     background
-                     layout="prev, pager, next"
-                     :page.sync="videoQueryParams.pageNum"
-                     :limit.sync="videoQueryParams.pageSize"
-                     @pagination="getVideoList"/>
-<!--    </el-scrollbar>-->
+          <el-avatar :src="item.userAvatar"/>
+        </div>
+      </el-card>
+      <el-empty v-show="videoTotal<=0" description="暂无数据"/>
+    </div>
+    <el-pagination v-show="videoTotal>0"
+                   :total="videoTotal"
+                   background
+                   layout="prev, pager, next"
+                   v-model:current-page="videoQueryParams.pageNum"
+                   :page-size="videoQueryParams.pageSize"
+                   @current-change="handleCurrentChange"
+                   @pagination="getVideoList"/>
   </div>
+  <el-dialog v-model="dialogVisible"
+             @close="dialogDestroy"
+             style="height: calc(100% - 10vh);"
+             width="80%"
+             :show-close="false">
+    <template #header="{ close, titleId, titleClass }">
+      <h2 :id="titleId" :class="titleClass" style="color: black">{{ video.videoTitle }}</h2>
+      <el-button circle :icon="Close" type="info" @click="close">
+      </el-button>
+    </template>
+    <video class="dialog-video"
+           style="width: 100%;max-height: 100%;border-radius: 1rem"
+           autoplay
+           :src="video.videoUrl"
+           controls/>
+  </el-dialog>
 </template>
 
 <script>
 import {videoCategoryPage} from "@/api/video.js";
+import {Close} from "@element-plus/icons-vue";
 
 export default {
   name: 'VideoCategoryPage',
+  computed: {
+    Close() {
+      return Close
+    }
+  },
   props: {
     channelId: Number,
   },
@@ -43,6 +71,19 @@ export default {
       },
       videoList: [],
       videoTotal: undefined,
+      loading: true,
+      svg: `
+        <path class="path" d="
+          M 30 15
+          L 28 17
+          M 25.61 25.61
+          A 15 15, 0, 0, 1, 15 30
+          A 15 15, 0, 1, 1, 27.99 7.5
+          L 15 15
+        " style="stroke-width: 4px; fill: rgba(0, 0, 0, 0)"/>
+      `,
+      dialogVisible: false,
+      video: {},
     }
   },
   created() {
@@ -50,13 +91,29 @@ export default {
   },
   methods: {
     getVideoList() {
+      this.loading = true
       this.videoQueryParams.categoryId = this.channelId
       videoCategoryPage(this.videoQueryParams).then(res => {
         if (res.code === 200) {
+          this.loading = false
           this.videoList = res.rows
           this.videoTotal = res.total
         }
       })
+    },
+    handleCurrentChange() {
+      this.getVideoList()
+    },
+    videoDialog(videoId) {
+      const videoF = this.videoList.filter(v => {
+        return videoId === v.videoId
+      })
+      this.video = videoF[0]
+      this.dialogVisible = true
+    },
+    dialogDestroy() {
+      const videoD = document.getElementsByClassName("dialog-video")
+      videoD[0].pause();
     }
   },
 }

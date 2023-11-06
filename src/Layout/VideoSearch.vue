@@ -56,7 +56,7 @@ export default {
 .hint-container {
   margin: 2rem;
   border-radius: 1rem;
-  background: black;
+  background: white;
   max-height: calc(100vh - 120px - 8rem);
   padding: 2rem;
   color: white;
