@@ -33,6 +33,11 @@
         <el-form-item label="视频标题" prop="videoTitle">
           <el-input v-model="videoForm.videoTitle"></el-input>
         </el-form-item>
+        <el-form-item label="视频分类" prop="categoryId">
+          <el-radio-group v-model="videoForm.categoryId">
+            <el-radio-button :label="item.id" v-for="item in categoryList">{{ item.name }}</el-radio-button>
+          </el-radio-group>
+        </el-form-item>
         <el-form-item label="视频简介" prop="videoDesc">
           <el-input type="textarea" v-model="videoForm.videoDesc"></el-input>
         </el-form-item>
@@ -46,7 +51,7 @@
 
 <script>
 // 接口引入
-import {publishVideo} from "@/api/video";
+import {publishVideo, videoCategory} from "@/api/video";
 // 七牛引入
 import * as qiniu from "qiniu-js";
 import {ElMessage} from "element-plus";
@@ -63,13 +68,14 @@ export default {
         Authorization: 'Bearer ' + useUserStore().token,
       },
       videoUploadPercent: undefined,
-      // coverImage: '',
       videoForm: {
         videoTitle: '',
         videoUrl: '',
+        categoryId: undefined,
         coverImage: '',
         videoDesc: ''
       },
+      categoryList: [],//视频分类集合
       rules: {
         videoTitle: [
           {required: true, message: '请输入视频标题', trigger: 'blur'},
@@ -83,6 +89,7 @@ export default {
     };
   },
   created() {
+    this.getVideoCategory()
   },
   mounted() {
     this.$nextTick(() => {
@@ -90,10 +97,17 @@ export default {
     });
   },
   methods: {
+    getVideoCategory() {
+      videoCategory().then(res => {
+        if (res.code === 200) {
+          this.categoryList = res.data
+        }
+      })
+    },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          // alert('submit!');
+          // console.log(this.videoForm)
           publishVideo(this.videoForm).then(res => {
             if (res.code === 200) {
               ElMessage({
