@@ -16,6 +16,7 @@
           </div>
         </div>
       </el-card>
+      <el-empty v-show="followTotal<=0" description="暂无数据"/>
     </el-scrollbar>
     <div class="video-container" style="width: 85%">
       <video-player-carousel

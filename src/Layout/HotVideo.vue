@@ -43,6 +43,7 @@
                :src="video.videoUrl"
                controls/>
       </el-dialog>
+      <el-empty v-show="hotVideoTotal<=0" description="暂无数据"/>
     </el-scrollbar>
   </div>
 </template>
