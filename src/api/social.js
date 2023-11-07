@@ -8,3 +8,11 @@ export function followPageList(data) {
         data: data
     })
 }
+
+// 关注用户
+export function followUser(userId) {
+    return request({
+        url: '/social/api/v1/follow/' + userId,
+        method: 'get'
+    })
+}

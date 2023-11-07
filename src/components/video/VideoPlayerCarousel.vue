@@ -40,7 +40,10 @@
           <div class="video-info" :title="item.videoTitle">
             <p class="video-title">{{ item.videoTitle }}</p>
             <div class="userinfo">
-              <img class="user-avatar" :src="item.userAvatar">
+              <div class="user-avatar">
+                <img class="user-avatar" :src="item.userAvatar">
+                <el-button v-if="!item.weatherFollow" @click="handleFollow(item.userId)">关注</el-button>
+              </div>
               <span class="username">{{ item.userNickName }}</span>
             </div>
           </div>
@@ -123,6 +126,7 @@ import {
   Apple, ChatDotRound, ChromeFilled, Close, Star
 } from '@element-plus/icons-vue'
 import {videoCommentPageList, addVideoComment, likeVideo} from '@/api/behave.js'
+import {followUser} from '@/api/social.js'
 
 export default {
   name: 'VideoPlayerCarousel',
@@ -167,6 +171,14 @@ export default {
   mounted() {
   },
   methods: {
+    handleFollow(userId) {
+      console.log(userId)
+      followUser(userId).then(res => {
+        if (res.code === 200) {
+          this.$message.success('关注成功')
+        }
+      })
+    },
     change(e) {
       this.$forceUpdate()
     },

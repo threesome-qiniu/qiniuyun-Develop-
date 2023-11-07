@@ -147,8 +147,8 @@ export default {
     },
 
     handleLogout() {
-      useUserStore().removetoken();
       localStorage.removeItem("userInfo")
+      useUserStore().removetoken();
       this.$router.push('/login');
     }
 

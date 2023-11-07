@@ -21,8 +21,8 @@
           <el-input v-model="loginform.password" placeholder="请输入密码"/>
         </el-form-item>
         <el-form-item>
-          <el-button @click="userLogin" type="primary" style="width: 240px;">登录</el-button>
-          <el-button @click="registerUser" type="primiry" style="width: 240px;">注册</el-button>
+          <el-button @click="handleUserLogin" type="primary" style="width: 240px;">登录</el-button>
+          <el-button @click="handleRegisterUser" type="primiry" style="width: 240px;">注册</el-button>
 
         </el-form-item>
 
@@ -52,12 +52,10 @@
   </el-row>
 </template>
 
-<script lang="ts">
-
+<script>
 import {reactive} from 'vue'
-import request from '../utils/request'
 import {ElMessage} from 'element-plus'
-import {userLogin, getInfo} from '@/api/user'
+import {userLogin, register, getInfo} from '@/api/user'
 import {useUserStore} from '@/store/useUserStore'
 
 export default {
@@ -72,32 +70,25 @@ export default {
   },
   methods: {
 
-
     // 登录
-    async userLogin() {
-
-      const res = await userLogin(this.loginform.name, this.loginform.password)
-      if (res.code != 200) {
-        ElMessage({
-          message: res.msg,
-          type: 'warning',
-        })
-
-      } else {
-        const userstore = useUserStore()
-        userstore.settoken(res.data.token)
-        // console.log(localStorage.getItem('user'));
-        this.getUserInfo();
-        ElMessage({
-          message: res.msg,
-          type: 'success',
-        })
-        await this.$router.push('/')
-
-      }
-      // console.log(res);
-
-
+    handleUserLogin() {
+      userLogin(this.loginform.name, this.loginform.password).then(res => {
+        if (res.code === 200) {
+          const userstore = useUserStore()
+          userstore.settoken(res.data.token)
+          this.getUserInfo();
+          ElMessage({
+            message: res.msg,
+            type: 'success',
+          })
+          this.$router.push('/index')
+        } else {
+          ElMessage({
+            message: res.msg,
+            type: 'warning',
+          })
+        }
+      })
     },
     getUserInfo() {
       getInfo().then(res => {
@@ -106,35 +97,32 @@ export default {
         }
       })
     },
-    registerUser() {
+    handleRegisterUser() {
       this.login = false
     },
     // 注册
-    async goregister() {
+    goregister() {
       this.login = true
-      const res = await request.post('/user/api/v1/register', {
+      register({
         username: this.registerform.name,
         password: this.registerform.password,
         confirmPassword: this.registerform.checkPass
+      }).then(res => {
+        if (res.code != 200) {
+          this.login = false
+          ElMessage({
+            message: res.msg,
+            type: 'warning',
+          })
+        } else {
+          this.login = true
+          ElMessage({
+            message: res.msg,
+            type: 'success',
+          })
+        }
       })
-      // 消息提示 判断code值
 
-      console.log(res);
-      if (res.code != 200) {
-        this.login = false
-        ElMessage({
-          message: res.msg,
-          type: 'warning',
-        })
-
-      } else {
-        this.login = true
-        ElMessage({
-          message: res.msg,
-          type: 'success',
-        })
-
-      }
     }
   },
   setup() {
@@ -151,24 +139,13 @@ export default {
     const rules = {
       name: [
         {required: true, message: '请输入账号', trigger: 'blur'},
-
+        {min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur'}
       ],
       password: [{required: true, message: '请输入密码', trigger: 'blur'},
-        {min: 3, max: 9, message: '长度必须3到9位', trigger: 'blur'},
+        {min: 3, max: 18, message: '长度必须3到18位', trigger: 'blur'},
       ],
       checkPass: [{required: true, message: '请再次输入密码', trigger: 'blur'},
-        {min: 3, max: 9, message: '长度必须3到9位', trigger: 'blur'},
-        {
-          validator: (rules: any, value: any, callback: any) => {
-            if (value == registerform.password) {
-              callback()
-            } else {
-              callback(new Error('两次输入密码不正确'))
-            }
-
-          }
-        }
-
+        {min: 3, max: 18, message: '长度必须3到18位', trigger: 'blur'},
       ]
     }
 
@@ -182,7 +159,6 @@ export default {
 .bgimage {
   background-image: url(../assets/affeade4eb186004825a19e2eab59088.jpg);
   background-size: 100% auto;
-
 
 }
 
