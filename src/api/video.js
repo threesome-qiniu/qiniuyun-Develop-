@@ -56,3 +56,11 @@ export function videoCategoryPage(data) {
     })
 }
 
+// 热门视频
+export function hotVideoPage(data) {
+    return request({
+        url: '/video/api/v1/hot',
+        method: 'post',
+        data: data
+    })
+}

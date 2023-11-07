@@ -17,6 +17,8 @@ import VueVideoPlayer from "vue-video-player";
 // import "video.js/dist/video-js.css";
 // import 'vue-video-player/src/custom-theme.css'
 
+import waterfall from 'vue-waterfall2'
+
 const app = createApp(App);
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
@@ -35,5 +37,6 @@ app.use(router);
 app.use(pinia);
 app.use(ElementPlus);
 app.use(VueVideoPlayer);
+app.use(waterfall)
 
 app.mount("#app");

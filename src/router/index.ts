@@ -31,6 +31,7 @@ const router = createRouter({
                 {path: "videoSearch", component: () => import("@/Layout/VideoSearch.vue")},
                 {path: "follow", component: () => import("@/Layout/Follow.vue")},
                 {path: "channel", component: () => import("@/Layout/Channel.vue")},
+                {path: "hotVideo", component: () => import("@/Layout/HotVideo.vue")},
             ],
         },
     ],

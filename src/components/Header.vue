@@ -25,7 +25,7 @@
                 class="mx-1"
                 effect="plain"
             >
-              {{ $index}}
+              {{ $index }}
             </el-tag>
           </template>
 
@@ -37,8 +37,28 @@
       </div>
     </div>
     <div class="nav-right">
-      <div>
-        <router-link class="link-type" :to="'/publish'"><span>发布视频</span>
+      <div style="align-items: center;display: flex;justify-content: center">
+        <!--消息 -->
+        <router-link class="link-type" :to="'/message'">
+          <div class="flex-center" style=" cursor: pointer; flex-direction: column;margin: 0 10px;">
+            <div style="height: 24px; justify-content: center; width: 24px;">
+              <ChatLineRound style="width: 20px; height: 20px;"/>
+            </div>
+            <p>
+              <span style="font-size: 0.8rem">消息</span>
+            </p>
+          </div>
+        </router-link>
+        <!--发布视频-->
+        <router-link class="link-type" :to="'/publish'">
+          <div class="flex-center" style=" cursor: pointer; flex-direction: column;margin: 0 10px;">
+            <div style="    height: 24px;justify-content: center;width: 24px;">
+              <Plus style="width: 20px; height: 20px;"/>
+            </div>
+            <p>
+              <span style="font-size: 0.8rem">投稿</span>
+            </p>
+          </div>
         </router-link>
       </div>
       <el-dropdown>

@@ -28,7 +28,7 @@ a {
 }
 
 .el-main {
-    padding: 1rem !important;
+    padding: 0 1rem 1rem 0 !important;
 }
 
 .el-upload {

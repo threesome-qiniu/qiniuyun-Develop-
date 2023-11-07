@@ -51,9 +51,9 @@ export default {
     return {
       tabsLeftList: [
         {id: 1, name: "首页", background: "#ff5c7c", link: "/index"},
+        {id: 2, name: "热门", background: "#73c9e5", link: "/hotVideo",},
         {id: 3, name: "关注", background: "#ff716d", link: "/follow"},
         {id: 4, name: "频道", background: "#6dc781", link: "/channel",},
-        {id: 2, name: "动态", background: "#73c9e5", link: "/dynamic",},
       ],
     }
   },
