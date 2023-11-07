@@ -24,6 +24,13 @@
           </div>
         </el-card>
       </div>
+      <div v-if="dataNotMore">
+        <el-divider>
+          <el-icon>
+            <star-filled/>
+          </el-icon>
+        </el-divider>
+      </div>
       <el-dialog v-model="dialogVisible"
                  @close="dialogDestroy"
                  style="height: calc(100% - 10vh);"
@@ -79,10 +86,18 @@ export default {
         pageSize: 10
       },
       video: {},
+      loadingData: true,
+      dataNotMore: false
     };
   },
   created() {
     this.getHotVideoPage()
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll, true);
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
     getHotVideoPage() {
@@ -106,7 +121,30 @@ export default {
     dialogDestroy() {
       const videoD = document.getElementsByClassName("dialog-video")
       videoD[0].pause();
-    }
+    },
+    handleScroll(e) {
+      if (e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight - 1) {
+        //在此处放入你的加载更多方法
+        console.log("23r2e1")
+        this.loadingData = false
+        this.loading = true
+        if (!this.loadingData) {
+          this.hotVideoQueryParams.pageNum += 1
+          hotVideoPage(this.hotVideoQueryParams).then(res => {
+            if (res.code === 200) {
+              this.hotVideoList = this.hotVideoList.concat(res.rows)
+              if (res.rows == null) {
+                this.dataNotMore = true
+              }
+              // this.hotVideoTotal = res.total
+              this.loading = false
+              this.loadingData = true
+              // console.log(this.hotVideoList)
+            }
+          })
+        }
+      }
+    },
   }
 };
 </script>
@@ -116,171 +154,6 @@ export default {
   border-radius: 1rem;
   height: 100%;
   padding: 0 1rem 1rem 0;
-}
-
-.video-uploader {
-  width: 100%;
-
-  .video-uploader-icon {
-    border: 2px dashed darkblue !important;
-    border-radius: 0.5rem;
-    font-size: 28px;
-    color: black;
-    width: 100%;
-    height: 100%;
-    line-height: 180px;
-    text-align: center;
-  }
-
-}
-
-.video-uploader .el-upload:hover {
-  border: 2px dashed #d83f3f !important;
-}
-
-.video {
-  width: 320px;
-  height: 180px;
-  border-radius: 1rem;
-  display: block;
-}
-
-.container-water-fall {
-  padding-top: 30px;
-  box-sizing: border-box;
-
-  h4 {
-    padding-top: 56px;
-    padding-bottom: 28px;
-    font-family: PingFangSC-Medium;
-    font-size: 36px;
-    color: #000000;
-    letter-spacing: 1px;
-    text-align: justify;
-  }
-
-  button {
-    // background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
-    background-color: yellow;
-    color: #24292e;
-    border: 1px solid rgba(27, 31, 35, 0.2);
-    border-radius: 0.25em;
-    width: 100px;
-    line-height: 26px;
-    font-size: 13px;
-
-    margin: 4px 0;
-    margin-right: 4px;
-    cursor: pointer;
-    outline: none;
-
-    &.blue-light {
-      background: #27fbc2;
-    }
-  }
-
-  button:hover {
-    background-image: linear-gradient(-180deg, #fafbfc, #ccc 90%);
-  }
-
-  .cell-item {
-    width: 100%;
-    // margin-bottom: 18px;
-    background: #ffffff;
-    border: 2px solid #f0f0f0;
-    border-radius: 12px 12px 12px 12px;
-    overflow: hidden;
-    box-sizing: border-box;
-
-    img {
-      // border-radius: 12px 12px 0 0;
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .item-body {
-      // border: 1px solid #F0F0F0;
-      padding: 12px;
-
-      .item-desc {
-        font-size: 15px;
-        color: #333333;
-        line-height: 15px;
-        font-weight: bold;
-      }
-
-      .item-footer {
-        margin-top: 22px;
-        position: relative;
-        display: flex;
-        align-items: center;
-
-        .avatar {
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          background-repeat: no-repeat;
-          background-size: contain;
-        }
-
-        .name {
-          max-width: 150px;
-          margin-left: 10px;
-          font-size: 14px;
-          color: #999999;
-        }
-
-        .like {
-          position: absolute;
-          right: 0;
-          display: flex;
-          align-items: center;
-
-          &.active {
-            i {
-            }
-
-            .like-total {
-              color: #ff4479;
-            }
-          }
-
-          i {
-            width: 28px;
-            display: block;
-          }
-
-          .like-total {
-            margin-left: 10px;
-            font-size: 12px;
-            color: #999999;
-          }
-        }
-      }
-    }
-  }
-}
-
-.githubdata {
-  float: right;
-  margin-right: 90px;
-
-  img {
-    width: 14px;
-    // height: 16px;
-  }
-}
-
-.action {
-  position: fixed;
-  z-index: 10;
-  top: 0;
-  left: 0;
-  background: white;
-  width: 100%;
-  padding-left: 10px;
-  box-sizing: border-box;
 }
 
 </style>
