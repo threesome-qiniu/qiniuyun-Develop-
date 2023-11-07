@@ -1,5 +1,5 @@
-import { createApp } from "vue";
-import { createPinia } from "pinia";
+import {createApp} from "vue";
+import {createPinia} from "pinia";
 
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
@@ -11,13 +11,11 @@ import App from "./App.vue";
 
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate"; //pinia 自动存储话插件
 
-import { parseTime, resetForm, addDateRange, handleTree } from "@/utils/roydon";
+import {parseTime, resetForm, addDateRange, handleTree} from "@/utils/roydon";
 
 import VueVideoPlayer from "vue-video-player";
 // import "video.js/dist/video-js.css";
 // import 'vue-video-player/src/custom-theme.css'
-
-import waterfall from 'vue-waterfall2'
 
 const app = createApp(App);
 const pinia = createPinia();
@@ -25,7 +23,7 @@ pinia.use(piniaPluginPersistedstate);
 
 // 注册所有ele图标
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-  app.component(key, component);
+    app.component(key, component);
 }
 // 全局方法挂载
 app.config.globalProperties.parseTime = parseTime;
@@ -37,6 +35,5 @@ app.use(router);
 app.use(pinia);
 app.use(ElementPlus);
 app.use(VueVideoPlayer);
-app.use(waterfall)
 
 app.mount("#app");

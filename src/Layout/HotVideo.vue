@@ -25,11 +25,7 @@
         </el-card>
       </div>
       <div v-if="dataNotMore">
-        <el-divider>
-          <el-icon>
-            <star-filled/>
-          </el-icon>
-        </el-divider>
+        <el-divider>暂无更多数据</el-divider>
       </div>
       <el-dialog v-model="dialogVisible"
                  @close="dialogDestroy"
@@ -124,22 +120,26 @@ export default {
     },
     handleScroll(e) {
       if (e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight - 1) {
-        //在此处放入你的加载更多方法
-        console.log("23r2e1")
-        this.loadingData = false
-        this.loading = true
-        if (!this.loadingData) {
+        //加载更多
+        if (this.loadingData) {
+          this.loading = true
+          this.loadingData = false
           this.hotVideoQueryParams.pageNum += 1
           hotVideoPage(this.hotVideoQueryParams).then(res => {
             if (res.code === 200) {
-              this.hotVideoList = this.hotVideoList.concat(res.rows)
-              if (res.rows == null) {
+              if (res.rows.length == 0) {
                 this.dataNotMore = true
+                this.loading = false
+                this.loadingData = false
+                return;
               }
+              this.hotVideoList = this.hotVideoList.concat(res.rows)
               // this.hotVideoTotal = res.total
               this.loading = false
-              this.loadingData = true
-              // console.log(this.hotVideoList)
+              setTimeout(() => {
+                // 流控
+                this.loadingData = true
+              }, 2000);
             }
           })
         }

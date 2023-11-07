@@ -43,7 +43,7 @@ export default {
     // this.calculationWidth()
   },
   mounted() {
-      this.calculationWidth();
+    this.calculationWidth();
   },
   methods: {
     //计算每个图片的宽度或者是列数
