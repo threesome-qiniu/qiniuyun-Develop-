@@ -9,6 +9,7 @@ const router = createRouter({
         {
             path: "/",
             name: "Index",
+            redirect: '/index',
             component: () => import("@/Layout/Index.vue"),
             children: [
                 {path: "index", component: () => import("@/Layout/Video.vue")},

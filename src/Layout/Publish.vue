@@ -9,6 +9,7 @@
                      :show-file-list="false"
                      :headers="headers"
                      :limit="1"
+                     v-loading="loading"
                      :on-success="handleVideoSuccess"
                      :before-upload="beforeUploadVideo"
                      :on-progress="uploadVideoProcess">
@@ -63,6 +64,7 @@ export default {
     return {
       title: "发布视频",
       videoFlag: false,
+      loading: false,
       videoUploadUrl: "http://localhost:9090/video/api/v1/upload",
       headers: {
         Authorization: 'Bearer ' + useUserStore().token,
@@ -141,6 +143,7 @@ export default {
     uploadVideoProcess(event, file, fileList) {
       console.log(event.percent, file, fileList)
       this.videoFlag = true
+      this.loading = true
       this.videoUploadPercent = Math.floor(event.percent)
     },
     // 获取上传地址
@@ -148,7 +151,8 @@ export default {
       this.videoFlag = false
       this.videoUploadPercent = 0
       if (res.code === 200) {
-        console.log(res.data)
+        // console.log(res.data)
+        this.loading = false
         this.videoForm.videoUrl = res.data.videoUrl
         this.videoForm.coverImage = res.data.vframe
       } else {
