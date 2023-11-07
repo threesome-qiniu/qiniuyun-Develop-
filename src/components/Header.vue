@@ -40,23 +40,25 @@
       <div style="align-items: center;display: flex;justify-content: center">
         <!--消息 -->
         <router-link class="link-type" :to="'/message'">
-          <div class="flex-center" style=" cursor: pointer; flex-direction: column;margin: 0 10px;">
-            <div style="height: 24px; justify-content: center; width: 24px;">
-              <ChatLineRound style="width: 20px; height: 20px;"/>
+          <div class="flex-center icon-click"
+               style=" cursor: pointer; flex-direction: column;margin: 0 10px;color: gray">
+            <div style="height: 20px; justify-content: center; width: 20px;">
+              <ChatLineRound style="width: 20px; height: 20px;font-weight: 600"/>
             </div>
             <p>
-              <span style="font-size: 0.8rem">消息</span>
+              <span style="font-size: 0.66rem;font-weight: 600">消息</span>
             </p>
           </div>
         </router-link>
         <!--发布视频-->
         <router-link class="link-type" :to="'/publish'">
-          <div class="flex-center" style=" cursor: pointer; flex-direction: column;margin: 0 10px;">
-            <div style="    height: 24px;justify-content: center;width: 24px;">
-              <Plus style="width: 20px; height: 20px;"/>
+          <div class="flex-center icon-click"
+               style=" cursor: pointer; flex-direction: column;margin: 0 10px;color: gray">
+            <div style="    height: 20px;justify-content: center;width: 20px;">
+              <Plus style="width: 20px; height: 20px;font-weight: 600"/>
             </div>
             <p>
-              <span style="font-size: 0.8rem">投稿</span>
+              <span style="font-size: 0.66rem;font-weight: 600">投稿</span>
             </p>
           </div>
         </router-link>
@@ -248,6 +250,12 @@ export default {
   justify-content: center;
   align-items: center;
   padding: 0 10px;
+}
+
+.icon-click:hover {
+  transition: all .3s ease-in;
+  color: black !important;
+  font-weight: 700 !important;
 }
 
 </style>

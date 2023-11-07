@@ -77,7 +77,7 @@ export default {
         " style="stroke-width: 4px; fill: rgba(0, 0, 0, 0)"/>
       `,
       hotVideoList: [],
-      hotVideoTotal: 0,
+      hotVideoTotal: undefined,
       hotVideoQueryParams: {
         pageNum: 1,
         pageSize: 10

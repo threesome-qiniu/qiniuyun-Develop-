@@ -49,7 +49,7 @@ export default {
         pageNum: 1,
         pageSize: 10,
       },
-      followTotal: 0,
+      followTotal: undefined,
       followList: [],
       videoList: [],
       userPageQueryParams: {
